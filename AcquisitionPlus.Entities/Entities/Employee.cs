@@ -6,7 +6,7 @@ namespace AcquisitionPlus.Entities.Entities
 {
     public class Employee
     {
-        public Guid Id { get; protected set; }
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public string LastName { get; set; }
         public string IdentificationNumber { get; set; }

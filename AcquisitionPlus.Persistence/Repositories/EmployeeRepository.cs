@@ -15,5 +15,18 @@ namespace AcquisitionPlus.Persistence.Repositories
         {
             get { return context; }
         }
+
+        public void Update(Employee employee)
+        {
+            var ActEmployee = Get(employee.Id);
+            ActEmployee.Name = employee.Name;
+            ActEmployee.LastName = employee.LastName;
+            ActEmployee.IdentificationNumber = employee.IdentificationNumber;
+            ActEmployee.Position = employee.Position;
+            ActEmployee.TelephoneNumber = employee.TelephoneNumber;
+            ActEmployee.UpdateDate = employee.UpdateDate;
+            ActEmployee.Status = employee.Status;
+            ActEmployee.IdDepartment = employee.IdDepartment;
+        }
     }
 }
