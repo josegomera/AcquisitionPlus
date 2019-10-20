@@ -1,4 +1,5 @@
-﻿using AcquisitionPlus.Business.Interfaces;
+﻿using System.Threading.Tasks;
+using AcquisitionPlus.Business.Interfaces;
 using AcquisitionPlus.DAL.SQL;
 using AcquisitionPlus.Entities.Entities;
 using AcquisitionPlus.Persistence.Generics;
@@ -14,6 +15,14 @@ namespace AcquisitionPlus.Persistence.Repositories
         public AcquisitionPlusDbContext PegasusContext 
         { 
             get { return context; }
+        }
+
+        public void Update(Department department)
+        {
+            var ActDepartment = Get(department.Id);
+            ActDepartment.Name = department.Name;
+            ActDepartment.Status = department.Status;
+            ActDepartment.UpdateDate = department.UpdateDate;
         }
     }
 }
