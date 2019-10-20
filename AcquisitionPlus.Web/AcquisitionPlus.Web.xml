@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AcquisitionPlus.Web</name>
+    </assembly>
+    <members>
+        <member name="T:AcquisitionPlus.Web.Controllers.DepartmentsController">
+            <summary>
+            Department Controller
+            </summary>
+        </member>
+        <member name="M:AcquisitionPlus.Web.Controllers.DepartmentsController.Get(System.Guid)">
+            <summary>
+            Get Department by Id(GUID)
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AcquisitionPlus.Web.Controllers.DepartmentsController.GetAll">
+            <summary>
+            Get all the Departments
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AcquisitionPlus.Web.Controllers.DepartmentsController.Add(AcquisitionPlus.Entities.Entities.Department)">
+            <summary>
+            Add a Department
+            </summary>
+            <param name="department"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

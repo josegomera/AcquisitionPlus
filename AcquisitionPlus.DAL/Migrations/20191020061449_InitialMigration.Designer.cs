@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AcquisitionPlus.DAL.Migrations
 {
     [DbContext(typeof(AcquisitionPlusDbContext))]
-    [Migration("20191020041814_InitialMigration")]
+    [Migration("20191020061449_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -30,11 +30,11 @@ namespace AcquisitionPlus.DAL.Migrations
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Estatus")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdateDate")
                         .HasColumnType("datetime2");
@@ -53,9 +53,6 @@ namespace AcquisitionPlus.DAL.Migrations
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Estatus")
-                        .HasColumnType("int");
-
                     b.Property<Guid?>("IdDepartment")
                         .HasColumnType("uniqueidentifier");
 
@@ -70,6 +67,9 @@ namespace AcquisitionPlus.DAL.Migrations
 
                     b.Property<string>("Position")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.Property<string>("TelephoneNumber")
                         .HasColumnType("nvarchar(max)");
@@ -114,9 +114,6 @@ namespace AcquisitionPlus.DAL.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Estatus")
-                        .HasColumnType("int");
-
                     b.Property<Guid?>("IdPurchaseOrder")
                         .HasColumnType("uniqueidentifier");
 
@@ -125,6 +122,9 @@ namespace AcquisitionPlus.DAL.Migrations
 
                     b.Property<Guid?>("IdUnitOfMeasurement")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.Property<int>("Stock")
                         .HasColumnType("int");
@@ -155,14 +155,14 @@ namespace AcquisitionPlus.DAL.Migrations
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Estatus")
-                        .HasColumnType("int");
-
                     b.Property<string>("NoOrder")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.Property<decimal>("UnitCost")
                         .HasColumnType("decimal(18,2)");
@@ -184,11 +184,11 @@ namespace AcquisitionPlus.DAL.Migrations
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Estatus")
-                        .HasColumnType("int");
-
                     b.Property<string>("Identification_Rnc")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdateDate")
                         .HasColumnType("datetime2");
@@ -210,7 +210,7 @@ namespace AcquisitionPlus.DAL.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Estatus")
+                    b.Property<int>("Status")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdateDate")

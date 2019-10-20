@@ -15,7 +15,7 @@ namespace AcquisitionPlus.DAL.Migrations
                     Name = table.Column<string>(nullable: true),
                     CreationDate = table.Column<DateTime>(nullable: false),
                     UpdateDate = table.Column<DateTime>(nullable: true),
-                    Estatus = table.Column<int>(nullable: false)
+                    Status = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -33,7 +33,7 @@ namespace AcquisitionPlus.DAL.Migrations
                     UnitCost = table.Column<decimal>(nullable: false),
                     CreationDate = table.Column<DateTime>(nullable: false),
                     UpdateDate = table.Column<DateTime>(nullable: true),
-                    Estatus = table.Column<int>(nullable: false)
+                    Status = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -48,7 +48,7 @@ namespace AcquisitionPlus.DAL.Migrations
                     Identification_Rnc = table.Column<string>(nullable: true),
                     CreationDate = table.Column<DateTime>(nullable: false),
                     UpdateDate = table.Column<DateTime>(nullable: true),
-                    Estatus = table.Column<int>(nullable: false)
+                    Status = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -63,7 +63,7 @@ namespace AcquisitionPlus.DAL.Migrations
                     Description = table.Column<string>(nullable: true),
                     CreationDate = table.Column<DateTime>(nullable: false),
                     UpdateDate = table.Column<DateTime>(nullable: true),
-                    Estatus = table.Column<int>(nullable: false)
+                    Status = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -82,7 +82,7 @@ namespace AcquisitionPlus.DAL.Migrations
                     Position = table.Column<string>(nullable: true),
                     CreationDate = table.Column<DateTime>(nullable: false),
                     UpdateDate = table.Column<DateTime>(nullable: true),
-                    Estatus = table.Column<int>(nullable: false),
+                    Status = table.Column<int>(nullable: false),
                     IdDepartment = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
@@ -106,7 +106,7 @@ namespace AcquisitionPlus.DAL.Migrations
                     Stock = table.Column<int>(nullable: false),
                     CreationDate = table.Column<DateTime>(nullable: false),
                     UpdateDate = table.Column<DateTime>(nullable: true),
-                    Estatus = table.Column<int>(nullable: false),
+                    Status = table.Column<int>(nullable: false),
                     IdSupplier = table.Column<Guid>(nullable: true),
                     IdPurchaseOrder = table.Column<Guid>(nullable: true),
                     IdUnitOfMeasurement = table.Column<Guid>(nullable: true)

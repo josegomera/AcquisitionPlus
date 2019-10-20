@@ -5,7 +5,10 @@ using AcquisitionPlus.Entities.Entities;
 
 namespace AcquisitionPlus.Web.Controllers
 {
-    [Route("api/[controller]")]
+    /// <summary>
+    /// Department Controller
+    /// </summary>
+    [Route("api/v1/[controller]")]
     [ApiController]
     public class DepartmentsController : ControllerBase
     {
@@ -16,6 +19,11 @@ namespace AcquisitionPlus.Web.Controllers
             _unitOfWork = unitOfWork;
         }
 
+        /// <summary>
+        /// Get Department by Id(GUID)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("{id:Guid}")]
         public IActionResult Get(Guid id)
@@ -32,6 +40,10 @@ namespace AcquisitionPlus.Web.Controllers
             }
         }
 
+        /// <summary>
+        /// Get all the Departments
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("GetAll")]
         public IActionResult GetAll()
@@ -46,6 +58,12 @@ namespace AcquisitionPlus.Web.Controllers
             }
         }
 
+
+        /// <summary>
+        /// Add a Department
+        /// </summary>
+        /// <param name="department"></param>
+        /// <returns></returns>
         [HttpPost]
         public IActionResult Add(Department department)
         {
