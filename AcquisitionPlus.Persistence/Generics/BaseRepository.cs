@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace AcquisitionPlus.Persistence.Generics
 {
@@ -22,7 +23,7 @@ namespace AcquisitionPlus.Persistence.Generics
             return context.Set<TEntity>().Where(predicate).FirstOrDefault();
         }
 
-        public virtual TEntity Get(int id)
+        public virtual TEntity Get(Guid id)
         {
             return context.Set<TEntity>().Find(id);
         }

@@ -12,7 +12,7 @@ namespace AcquisitionPlus.Entities.Entities
         public int Stock { get; set; }
         public DateTime CreationDate { get; set; }
         public DateTime? UpdateDate { get; set; }
-        public Estatus Estatus { get; set; }
+        public Status Status { get; set; }
 
         // Relationships
         public Guid? IdSupplier { get; set; }

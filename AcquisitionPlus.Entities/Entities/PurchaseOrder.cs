@@ -13,7 +13,7 @@ namespace AcquisitionPlus.Entities.Entities
         public decimal UnitCost { get; set; }
         public DateTime CreationDate { get; set; }
         public DateTime? UpdateDate { get; set; }
-        public Estatus Estatus { get; set; }
+        public Status Status { get; set; }
 
         //Relationship
         public ICollection<Product> Products { get; set; }

@@ -14,7 +14,7 @@ namespace AcquisitionPlus.Entities.Entities
         public string Position { get; set; }
         public DateTime CreationDate { get; set; }
         public DateTime? UpdateDate { get; set; }
-        public Estatus Estatus { get; set; }
+        public Status Status { get; set; }
 
         //Relationship
         public Guid? IdDepartment { get; set; }

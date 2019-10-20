@@ -10,7 +10,7 @@ namespace AcquisitionPlus.Entities.Entities
         public string Identification_Rnc { get; set; }
         public DateTime CreationDate { get; set; }
         public DateTime? UpdateDate { get; set; }
-        public Estatus Estatus { get; set; }
+        public Status Status { get; set; }
 
         // Relationships
         public ICollection<Product> Products { get; set; }

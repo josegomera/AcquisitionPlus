@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AcquisitionPlus.Entities.Entities
 {
-    public enum Estatus
+    public enum Status
     {
         Active = 1,
         Inactive = 2
