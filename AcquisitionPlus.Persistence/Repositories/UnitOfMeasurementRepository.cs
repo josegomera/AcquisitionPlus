@@ -15,5 +15,13 @@ namespace AcquisitionPlus.Persistence.Repositories
         {
             get { return context; }
         }
+
+        public void Update(UnitOfMeasurement unitOfMeasurement)
+        {
+            var ActunitOfMeasurement = Get(unitOfMeasurement.Id);
+            ActunitOfMeasurement.Description = unitOfMeasurement.Description;
+            ActunitOfMeasurement.UpdateDate = unitOfMeasurement.UpdateDate;
+            ActunitOfMeasurement.Status = unitOfMeasurement.Status;
+        }
     }
 }
