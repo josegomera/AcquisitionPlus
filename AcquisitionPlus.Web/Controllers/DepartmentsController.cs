@@ -20,6 +20,23 @@ namespace AcquisitionPlus.Web.Controllers
         }
 
         /// <summary>
+        /// Get all the Departments
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult Get()
+        {
+            try
+            {
+                return StatusCode(200, _unitOfWork.Department.GetAll());
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+
+        /// <summary>
         /// Get Department by Id(GUID)
         /// </summary>
         /// <param name="id"></param>
@@ -33,23 +50,6 @@ namespace AcquisitionPlus.Web.Controllers
                 if (id == null)  return StatusCode(400, new { ErrorMessage = "Object is Null" });
 
                 return StatusCode(200, _unitOfWork.Department.Get(id));
-            }
-            catch (Exception e)
-            {
-                return StatusCode(500, e.Message);
-            }
-        }
-
-        /// <summary>
-        /// Get all the Departments
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        public IActionResult GetAll()
-        {
-            try
-            {
-                return StatusCode(200, _unitOfWork.Department.GetAll());
             }
             catch (Exception e)
             {
