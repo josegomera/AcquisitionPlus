@@ -9,7 +9,7 @@ namespace AcquisitionPlus.Business.Interfaces
         int Complete();
 
         IDepartmentRepository Department { get; }
-        IEmployeeReposiory Employee { get; }
+        IEmployeeRepository Employee { get; }
         IEmployeePurchaseOrderRepository EmployeePurchaseOrder { get; }
         IProductRepository Product { get; }
         IPurchaseOrderRepository PurchaseOrder { get; }

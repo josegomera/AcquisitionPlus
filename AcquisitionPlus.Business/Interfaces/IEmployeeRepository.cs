@@ -2,7 +2,7 @@
 
 namespace AcquisitionPlus.Business.Interfaces
 {
-    public interface IEmployeeReposiory : IBaseRepository<Employee>
+    public interface IEmployeeRepository : IBaseRepository<Employee>
     {
     }
 }
