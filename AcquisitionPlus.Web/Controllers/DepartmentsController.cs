@@ -45,7 +45,6 @@ namespace AcquisitionPlus.Web.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Route("GetAll")]
         public IActionResult GetAll()
         {
             try
@@ -109,6 +108,5 @@ namespace AcquisitionPlus.Web.Controllers
                 return StatusCode(500, e.Message);
             }
         }
-
     }
 }
