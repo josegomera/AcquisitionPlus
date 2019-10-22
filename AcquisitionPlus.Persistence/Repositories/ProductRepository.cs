@@ -11,9 +11,19 @@ namespace AcquisitionPlus.Persistence.Repositories
         {
         }
 
-        public AcquisitionPlusDbContext PegasusContext
+        public AcquisitionPlusDbContext AcquisitionPlusContext
         {
             get { return context; }
+        }
+
+        public void Update(Product product)
+        {
+            var Actproduct = Get(product.Id);
+            Actproduct.Status = product.Status;
+            Actproduct.Stock = product.Stock;
+            Actproduct.IdSupplier = product.IdSupplier;
+            Actproduct.IdUnitOfMeasurement = product.IdUnitOfMeasurement;
+            Actproduct.UpdateDate = product.UpdateDate;
         }
     }
 }

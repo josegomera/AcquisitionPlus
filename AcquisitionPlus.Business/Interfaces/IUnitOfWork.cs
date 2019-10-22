@@ -10,11 +10,11 @@ namespace AcquisitionPlus.Business.Interfaces
 
         IDepartmentRepository Department { get; }
         IEmployeeRepository Employee { get; }
-        IEmployeePurchaseOrderRepository EmployeePurchaseOrder { get; }
         IProductRepository Product { get; }
         IPurchaseOrderRepository PurchaseOrder { get; }
         ISupplierRepository Supplier { get; }
         IUnitOfMeasurementRepository UnitOfMeasurement { get; }
+        IItemRepository Item { get; }
 
         void Dispose();
     }

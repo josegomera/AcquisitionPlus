@@ -82,19 +82,29 @@ namespace AcquisitionPlus.DAL.Migrations
                     b.ToTable("Employees");
                 });
 
-            modelBuilder.Entity("AcquisitionPlus.Entities.Entities.EmployeePurchaseOrder", b =>
+            modelBuilder.Entity("AcquisitionPlus.Entities.Entities.Item", b =>
                 {
-                    b.Property<Guid?>("IdEmployee")
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("IdPurchaseOrder")
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("IdProduct")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("IdEmployee", "IdPurchaseOrder");
+                    b.Property<Guid>("IdPurchaseOrder")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdProduct")
+                        .IsUnique();
 
                     b.HasIndex("IdPurchaseOrder");
 
-                    b.ToTable("EmployeePurchaseOrders");
+                    b.ToTable("Item");
                 });
 
             modelBuilder.Entity("AcquisitionPlus.Entities.Entities.Product", b =>
@@ -112,9 +122,6 @@ namespace AcquisitionPlus.DAL.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("IdPurchaseOrder")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid?>("IdSupplier")
                         .HasColumnType("uniqueidentifier");
 
@@ -131,8 +138,6 @@ namespace AcquisitionPlus.DAL.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("IdPurchaseOrder");
 
                     b.HasIndex("IdSupplier");
 
@@ -153,6 +158,9 @@ namespace AcquisitionPlus.DAL.Migrations
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<Guid>("IdEmployee")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("NoOrder")
                         .HasColumnType("nvarchar(max)");
 
@@ -169,6 +177,8 @@ namespace AcquisitionPlus.DAL.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IdEmployee");
 
                     b.ToTable("PurchaseOrders");
                 });
@@ -226,16 +236,16 @@ namespace AcquisitionPlus.DAL.Migrations
                         .HasForeignKey("IdDepartment");
                 });
 
-            modelBuilder.Entity("AcquisitionPlus.Entities.Entities.EmployeePurchaseOrder", b =>
+            modelBuilder.Entity("AcquisitionPlus.Entities.Entities.Item", b =>
                 {
-                    b.HasOne("AcquisitionPlus.Entities.Entities.Employee", "Employee")
-                        .WithMany("employeePurchaseOrders")
-                        .HasForeignKey("IdEmployee")
+                    b.HasOne("AcquisitionPlus.Entities.Entities.Product", "Product")
+                        .WithOne("Item")
+                        .HasForeignKey("AcquisitionPlus.Entities.Entities.Item", "IdProduct")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("AcquisitionPlus.Entities.Entities.PurchaseOrder", "PurchaseOrder")
-                        .WithMany("employeePurchaseOrders")
+                        .WithMany("Items")
                         .HasForeignKey("IdPurchaseOrder")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -243,10 +253,6 @@ namespace AcquisitionPlus.DAL.Migrations
 
             modelBuilder.Entity("AcquisitionPlus.Entities.Entities.Product", b =>
                 {
-                    b.HasOne("AcquisitionPlus.Entities.Entities.PurchaseOrder", "PurchaseOrder")
-                        .WithMany("Products")
-                        .HasForeignKey("IdPurchaseOrder");
-
                     b.HasOne("AcquisitionPlus.Entities.Entities.Supplier", "Supplier")
                         .WithMany("Products")
                         .HasForeignKey("IdSupplier");
@@ -254,6 +260,15 @@ namespace AcquisitionPlus.DAL.Migrations
                     b.HasOne("AcquisitionPlus.Entities.Entities.UnitOfMeasurement", "UnitOfMeasurement")
                         .WithMany("Products")
                         .HasForeignKey("IdUnitOfMeasurement");
+                });
+
+            modelBuilder.Entity("AcquisitionPlus.Entities.Entities.PurchaseOrder", b =>
+                {
+                    b.HasOne("AcquisitionPlus.Entities.Entities.Employee", "Employee")
+                        .WithMany("PurchaseOrders")
+                        .HasForeignKey("IdEmployee")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
