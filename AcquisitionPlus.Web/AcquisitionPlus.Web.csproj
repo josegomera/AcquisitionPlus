@@ -11,6 +11,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="app.yaml" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.6">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -32,6 +36,12 @@
     <ProjectReference Include="..\AcquisitionPlus.DAL\AcquisitionPlus.DAL.csproj" />
     <ProjectReference Include="..\AcquisitionPlus.Domain\AcquisitionPlus.Domain.csproj" />
     <ProjectReference Include="..\AcquisitionPlus.Persistence\AcquisitionPlus.Persistence.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="app.yaml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>
