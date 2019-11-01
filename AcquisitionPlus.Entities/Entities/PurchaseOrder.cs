@@ -6,7 +6,7 @@ namespace AcquisitionPlus.Entities.Entities
 {
     public class PurchaseOrder
     {
-        public Guid Id { get; protected set; }
+        public Guid Id { get; set; }
         public string NoOrder { get; set; }
         public DateTime OrderDate { get; set; }
         public int Amount { get; set; }
@@ -15,8 +15,11 @@ namespace AcquisitionPlus.Entities.Entities
         public DateTime? UpdateDate { get; set; }
         public Status Status { get; set; }
 
-        //Relationship
-        public ICollection<Product> Products { get; set; }
-        public ICollection<EmployeePurchaseOrder> employeePurchaseOrders { get; set; }
+
+        public ICollection<Item> Items { get; set; }
+
+        public Guid IdEmployee { get; set; }
+        public Employee Employee { get; set; }
+
     }
 }

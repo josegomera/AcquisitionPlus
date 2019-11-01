@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using AcquisitionPlus.Business.Interfaces;
 using AcquisitionPlus.DAL.SQL;
+using AcquisitionPlus.Domain.PurchaseOrders;
 using AcquisitionPlus.Persistence.Generics;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -38,6 +39,7 @@ namespace AcquisitionPlus.Web
                options.UseSqlServer(Configuration.GetConnectionString("AcquisitionPlusDb")));
 
             services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IPurchaseHandler, PurchaseHandler>();
 
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
