@@ -11,9 +11,17 @@ namespace AcquisitionPlus.Persistence.Repositories
         {
         }
 
-        public AcquisitionPlusDbContext PegasusContext
+        public AcquisitionPlusDbContext AcquisitionPlusContext
         {
             get { return context; }
+        }
+
+        public void Update(Supplier supplier)
+        {
+            var ActSupplier = Get(supplier.Id);
+            ActSupplier.Identification_Rnc = supplier.Identification_Rnc;
+            ActSupplier.UpdateDate = supplier.UpdateDate;
+            ActSupplier.Status = supplier.Status;
         }
     }
 }

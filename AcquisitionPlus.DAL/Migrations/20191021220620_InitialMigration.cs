@@ -23,24 +23,6 @@ namespace AcquisitionPlus.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "PurchaseOrders",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(nullable: false),
-                    NoOrder = table.Column<string>(nullable: true),
-                    OrderDate = table.Column<DateTime>(nullable: false),
-                    Amount = table.Column<int>(nullable: false),
-                    UnitCost = table.Column<decimal>(nullable: false),
-                    CreationDate = table.Column<DateTime>(nullable: false),
-                    UpdateDate = table.Column<DateTime>(nullable: true),
-                    Status = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PurchaseOrders", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Suppliers",
                 columns: table => new
                 {
@@ -108,18 +90,11 @@ namespace AcquisitionPlus.DAL.Migrations
                     UpdateDate = table.Column<DateTime>(nullable: true),
                     Status = table.Column<int>(nullable: false),
                     IdSupplier = table.Column<Guid>(nullable: true),
-                    IdPurchaseOrder = table.Column<Guid>(nullable: true),
                     IdUnitOfMeasurement = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Products", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Products_PurchaseOrders_IdPurchaseOrder",
-                        column: x => x.IdPurchaseOrder,
-                        principalTable: "PurchaseOrders",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Products_Suppliers_IdSupplier",
                         column: x => x.IdSupplier,
@@ -135,23 +110,50 @@ namespace AcquisitionPlus.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "EmployeePurchaseOrders",
+                name: "PurchaseOrders",
                 columns: table => new
                 {
-                    IdEmployee = table.Column<Guid>(nullable: false),
-                    IdPurchaseOrder = table.Column<Guid>(nullable: false)
+                    Id = table.Column<Guid>(nullable: false),
+                    NoOrder = table.Column<string>(nullable: true),
+                    OrderDate = table.Column<DateTime>(nullable: false),
+                    Amount = table.Column<int>(nullable: false),
+                    UnitCost = table.Column<decimal>(nullable: false),
+                    CreationDate = table.Column<DateTime>(nullable: false),
+                    UpdateDate = table.Column<DateTime>(nullable: true),
+                    Status = table.Column<int>(nullable: false),
+                    IdEmployee = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EmployeePurchaseOrders", x => new { x.IdEmployee, x.IdPurchaseOrder });
+                    table.PrimaryKey("PK_PurchaseOrders", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_EmployeePurchaseOrders_Employees_IdEmployee",
+                        name: "FK_PurchaseOrders_Employees_IdEmployee",
                         column: x => x.IdEmployee,
                         principalTable: "Employees",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Item",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    Description = table.Column<string>(nullable: true),
+                    IdPurchaseOrder = table.Column<Guid>(nullable: false),
+                    IdProduct = table.Column<Guid>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Item", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_EmployeePurchaseOrders_PurchaseOrders_IdPurchaseOrder",
+                        name: "FK_Item_Products_IdProduct",
+                        column: x => x.IdProduct,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Item_PurchaseOrders_IdPurchaseOrder",
                         column: x => x.IdPurchaseOrder,
                         principalTable: "PurchaseOrders",
                         principalColumn: "Id",
@@ -159,18 +161,19 @@ namespace AcquisitionPlus.DAL.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_EmployeePurchaseOrders_IdPurchaseOrder",
-                table: "EmployeePurchaseOrders",
-                column: "IdPurchaseOrder");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Employees_IdDepartment",
                 table: "Employees",
                 column: "IdDepartment");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Products_IdPurchaseOrder",
-                table: "Products",
+                name: "IX_Item_IdProduct",
+                table: "Item",
+                column: "IdProduct",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Item_IdPurchaseOrder",
+                table: "Item",
                 column: "IdPurchaseOrder");
 
             migrationBuilder.CreateIndex(
@@ -182,18 +185,20 @@ namespace AcquisitionPlus.DAL.Migrations
                 name: "IX_Products_IdUnitOfMeasurement",
                 table: "Products",
                 column: "IdUnitOfMeasurement");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PurchaseOrders_IdEmployee",
+                table: "PurchaseOrders",
+                column: "IdEmployee");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "EmployeePurchaseOrders");
+                name: "Item");
 
             migrationBuilder.DropTable(
                 name: "Products");
-
-            migrationBuilder.DropTable(
-                name: "Employees");
 
             migrationBuilder.DropTable(
                 name: "PurchaseOrders");
@@ -203,6 +208,9 @@ namespace AcquisitionPlus.DAL.Migrations
 
             migrationBuilder.DropTable(
                 name: "UnitOfMeasurements");
+
+            migrationBuilder.DropTable(
+                name: "Employees");
 
             migrationBuilder.DropTable(
                 name: "Departments");

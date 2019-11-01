@@ -12,9 +12,13 @@ namespace AcquisitionPlus.DAL.EntityConfigurations
 
             builder.HasKey(a => a.Id);
 
-            builder.HasMany(p => p.Products)
+            builder.HasOne(e => e.Employee)
+                .WithMany(p => p.PurchaseOrders)
+                .HasForeignKey(e => e.IdEmployee);
+
+            builder.HasMany(i => i.Items)
                 .WithOne(po => po.PurchaseOrder)
-                .HasForeignKey(p => p.IdPurchaseOrder);
+                .HasForeignKey(i => i.IdPurchaseOrder);
         }
     }
 }

@@ -1,26 +1,27 @@
 ﻿using System;
-using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using AcquisitionPlus.Business.Interfaces;
 using AcquisitionPlus.Entities.Entities;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace AcquisitionPlus.Web.Controllers
 {
-    /// <summary>
-    /// Department Controller
-    /// </summary>
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class DepartmentsController : ControllerBase
+    public class SuppliersController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public DepartmentsController(IUnitOfWork unitOfWork)
+        public SuppliersController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
         /// <summary>
-        /// Get all the Departments
+        /// Get all the Suppliers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -28,7 +29,7 @@ namespace AcquisitionPlus.Web.Controllers
         {
             try
             {
-                return StatusCode(200, _unitOfWork.Department.GetAll());
+                return StatusCode(200, _unitOfWork.Supplier.GetAll());
             }
             catch (Exception e)
             {
@@ -37,7 +38,7 @@ namespace AcquisitionPlus.Web.Controllers
         }
 
         /// <summary>
-        /// Get Department by Id(GUID)
+        /// Get Suppliers by Id(GUID)
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -47,9 +48,9 @@ namespace AcquisitionPlus.Web.Controllers
         {
             try
             {
-                if (id == null)  return StatusCode(400, new { ErrorMessage = "Object is Null" });
+                if (id == null) return StatusCode(400, new { ErrorMessage = "Object is Null" });
 
-                return StatusCode(200, _unitOfWork.Department.Get(id));
+                return StatusCode(200, _unitOfWork.Supplier.Get(id));
             }
             catch (Exception e)
             {
@@ -58,22 +59,22 @@ namespace AcquisitionPlus.Web.Controllers
         }
 
         /// <summary>
-        /// Add a Department
+        /// Add a Supplier
         /// </summary>
-        /// <param name="department"></param>
+        /// <param name="supplier"></param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult Add(Department department)
+        public IActionResult Add(Supplier supplier)
         {
             try
             {
-                if (department == null) return StatusCode(400, new { ErroMessage = "Object is Null" });
+                if (supplier == null) return StatusCode(400, new { ErroMessage = "Object is Null" });
 
-                department.CreationDate = DateTime.UtcNow.AddMinutes(-240);
-                department.Id = Guid.NewGuid();
-                department.Status = Status.Active;
+                supplier.CreationDate = DateTime.UtcNow.AddMinutes(-240);
+                supplier.Id = Guid.NewGuid();
+                supplier.Status = Status.Active;
 
-                _unitOfWork.Department.Add(department);
+                _unitOfWork.Supplier.Add(supplier);
 
                 return StatusCode(201, _unitOfWork.Complete());
             }
@@ -84,22 +85,22 @@ namespace AcquisitionPlus.Web.Controllers
         }
 
         /// <summary>
-        /// Update a Department
+        /// Update a Supplier
         /// </summary>
-        /// <param name="department"></param>
+        /// <param name="supplier"></param>
         /// <returns></returns>
         [HttpPut]
-        public IActionResult Update(Department department)
+        public IActionResult Update(Supplier supplier)
         {
             try
             {
-                if (department == null) return StatusCode(400, new { ErroMessage = "Object is Null" });
+                if (supplier == null) return StatusCode(400, new { ErroMessage = "Object is Null" });
 
-                department.UpdateDate = DateTime.UtcNow.AddMinutes(-240);
+                supplier.UpdateDate = DateTime.UtcNow.AddMinutes(-240);
 
-                department.Status = Status.Active;
+                supplier.Status = Status.Active;
 
-                _unitOfWork.Department.Update(department);
+                _unitOfWork.Supplier.Update(supplier);
 
                 return StatusCode(204, _unitOfWork.Complete());
             }

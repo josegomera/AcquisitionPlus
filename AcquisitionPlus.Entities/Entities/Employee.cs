@@ -6,7 +6,7 @@ namespace AcquisitionPlus.Entities.Entities
 {
     public class Employee
     {
-        public Guid Id { get; protected set; }
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public string LastName { get; set; }
         public string IdentificationNumber { get; set; }
@@ -19,6 +19,6 @@ namespace AcquisitionPlus.Entities.Entities
         //Relationship
         public Guid? IdDepartment { get; set; }
         public Department Department { get; set; }
-        public ICollection<EmployeePurchaseOrder> employeePurchaseOrders { get; set; }
+        public ICollection<PurchaseOrder> PurchaseOrders { get; set; }
     }
 }

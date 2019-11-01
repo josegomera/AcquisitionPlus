@@ -12,7 +12,7 @@ namespace AcquisitionPlus.Persistence.Repositories
         {
         }
 
-        public AcquisitionPlusDbContext PegasusContext 
+        public AcquisitionPlusDbContext AcquisitionPlusContext
         { 
             get { return context; }
         }

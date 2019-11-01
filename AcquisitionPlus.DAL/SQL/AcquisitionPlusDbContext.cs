@@ -16,7 +16,6 @@ namespace AcquisitionPlus.DAL.SQL
             base.OnModelCreating(builder);
             builder.ApplyConfiguration(new DepartmentConfiguration());
             builder.ApplyConfiguration(new EmployeeConfiguration());
-            builder.ApplyConfiguration(new EmployeePurchaseOrderConfiguration());
             builder.ApplyConfiguration(new ProductConfiguration());
             builder.ApplyConfiguration(new PurchaseOrderCofiguration());
             builder.ApplyConfiguration(new SupplierConfiguration());
@@ -25,7 +24,6 @@ namespace AcquisitionPlus.DAL.SQL
 
         public DbSet<Department> Departments { get; set; }
         public DbSet<Employee> Employees { get; set; }
-        public DbSet<EmployeePurchaseOrder> EmployeePurchaseOrders { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<PurchaseOrder> PurchaseOrders { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }

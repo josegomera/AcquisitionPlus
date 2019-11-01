@@ -1,26 +1,27 @@
 ﻿using System;
-using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using AcquisitionPlus.Business.Interfaces;
 using AcquisitionPlus.Entities.Entities;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace AcquisitionPlus.Web.Controllers
 {
-    /// <summary>
-    /// Department Controller
-    /// </summary>
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class DepartmentsController : ControllerBase
+    public class UnitOfMeasurementsController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public DepartmentsController(IUnitOfWork unitOfWork)
+        public UnitOfMeasurementsController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
         /// <summary>
-        /// Get all the Departments
+        /// Get all the UnitOfMeasurement
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -28,7 +29,7 @@ namespace AcquisitionPlus.Web.Controllers
         {
             try
             {
-                return StatusCode(200, _unitOfWork.Department.GetAll());
+                return StatusCode(200, _unitOfWork.UnitOfMeasurement.GetAll());
             }
             catch (Exception e)
             {
@@ -37,7 +38,7 @@ namespace AcquisitionPlus.Web.Controllers
         }
 
         /// <summary>
-        /// Get Department by Id(GUID)
+        /// Get UnitOfMeasurement by Id(GUID)
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -47,9 +48,9 @@ namespace AcquisitionPlus.Web.Controllers
         {
             try
             {
-                if (id == null)  return StatusCode(400, new { ErrorMessage = "Object is Null" });
+                if (id == null) return StatusCode(400, new { ErrorMessage = "Object is Null" });
 
-                return StatusCode(200, _unitOfWork.Department.Get(id));
+                return StatusCode(200, _unitOfWork.UnitOfMeasurement.Get(id));
             }
             catch (Exception e)
             {
@@ -58,22 +59,22 @@ namespace AcquisitionPlus.Web.Controllers
         }
 
         /// <summary>
-        /// Add a Department
+        /// Add a UnitOfMeasurement
         /// </summary>
-        /// <param name="department"></param>
+        /// <param name="unitOfMeasurement"></param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult Add(Department department)
+        public IActionResult Add(UnitOfMeasurement unitOfMeasurement)
         {
             try
             {
-                if (department == null) return StatusCode(400, new { ErroMessage = "Object is Null" });
+                if (unitOfMeasurement == null) return StatusCode(400, new { ErroMessage = "Object is Null" });
 
-                department.CreationDate = DateTime.UtcNow.AddMinutes(-240);
-                department.Id = Guid.NewGuid();
-                department.Status = Status.Active;
+                unitOfMeasurement.CreationDate = DateTime.UtcNow.AddMinutes(-240);
+                unitOfMeasurement.Id = Guid.NewGuid();
+                unitOfMeasurement.Status = Status.Active;
 
-                _unitOfWork.Department.Add(department);
+                _unitOfWork.UnitOfMeasurement.Add(unitOfMeasurement);
 
                 return StatusCode(201, _unitOfWork.Complete());
             }
@@ -84,22 +85,22 @@ namespace AcquisitionPlus.Web.Controllers
         }
 
         /// <summary>
-        /// Update a Department
+        /// Update a UnitOfMeasurement
         /// </summary>
-        /// <param name="department"></param>
+        /// <param name="unitOfMeasurement"></param>
         /// <returns></returns>
         [HttpPut]
-        public IActionResult Update(Department department)
+        public IActionResult Update(UnitOfMeasurement unitOfMeasurement)
         {
             try
             {
-                if (department == null) return StatusCode(400, new { ErroMessage = "Object is Null" });
+                if (unitOfMeasurement == null) return StatusCode(400, new { ErroMessage = "Object is Null" });
 
-                department.UpdateDate = DateTime.UtcNow.AddMinutes(-240);
+                unitOfMeasurement.UpdateDate = DateTime.UtcNow.AddMinutes(-240);
 
-                department.Status = Status.Active;
+                unitOfMeasurement.Status = Status.Active;
 
-                _unitOfWork.Department.Update(department);
+                _unitOfWork.UnitOfMeasurement.Update(unitOfMeasurement);
 
                 return StatusCode(204, _unitOfWork.Complete());
             }
