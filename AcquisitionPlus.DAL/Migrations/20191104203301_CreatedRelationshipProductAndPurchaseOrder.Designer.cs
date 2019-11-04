@@ -4,14 +4,16 @@ using AcquisitionPlus.DAL.SQL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AcquisitionPlus.DAL.Migrations
 {
     [DbContext(typeof(AcquisitionPlusDbContext))]
-    partial class AcquisitionPlusDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191104203301_CreatedRelationshipProductAndPurchaseOrder")]
+    partial class CreatedRelationshipProductAndPurchaseOrder
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -161,7 +163,9 @@ namespace AcquisitionPlus.DAL.Migrations
 
                     b.HasIndex("IdEmployee");
 
-                    b.HasIndex("IdProduct");
+                    b.HasIndex("IdProduct")
+                        .IsUnique()
+                        .HasFilter("[IdProduct] IS NOT NULL");
 
                     b.ToTable("PurchaseOrders");
                 });
@@ -237,8 +241,8 @@ namespace AcquisitionPlus.DAL.Migrations
                         .HasForeignKey("IdEmployee");
 
                     b.HasOne("AcquisitionPlus.Entities.Entities.Product", "Product")
-                        .WithMany("PurchaseOrders")
-                        .HasForeignKey("IdProduct");
+                        .WithOne("PurchaseOrder")
+                        .HasForeignKey("AcquisitionPlus.Entities.Entities.PurchaseOrder", "IdProduct");
                 });
 #pragma warning restore 612, 618
         }

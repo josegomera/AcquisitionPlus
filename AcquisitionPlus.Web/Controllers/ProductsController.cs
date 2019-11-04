@@ -20,10 +20,6 @@ namespace AcquisitionPlus.Web.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        /// <summary>
-        /// Get all the Products
-        /// </summary>
-        /// <returns></returns>
         [HttpGet]
         public IActionResult Get()
         {
@@ -37,11 +33,6 @@ namespace AcquisitionPlus.Web.Controllers
             }
         }
 
-        /// <summary>
-        /// Get product by Id(GUID)
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
         [HttpGet]
         [Route("{id:Guid}")]
         public IActionResult Get(Guid id)
@@ -58,11 +49,22 @@ namespace AcquisitionPlus.Web.Controllers
             }
         }
 
-        /// <summary>
-        /// Add a Product
-        /// </summary>
-        /// <param name="product"></param>
-        /// <returns></returns>
+        [HttpGet]
+        [Route("GetProducts")]
+        public IActionResult GetProducts()
+        {
+            try
+            {
+                var products = _unitOfWork.Product.GetAll().Select(x => new { x.Id, Product = x.Description}).ToList();
+         
+                return StatusCode(200, products);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+
         [HttpPost]
         public IActionResult Add(Product product)
         {
@@ -84,11 +86,6 @@ namespace AcquisitionPlus.Web.Controllers
             }
         }
 
-        /// <summary>
-        /// Update a Product
-        /// </summary>
-        /// <param name="product"></param>
-        /// <returns></returns>
         [HttpPut]
         public IActionResult Update(Product product)
         {

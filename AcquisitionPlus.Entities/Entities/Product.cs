@@ -18,7 +18,7 @@ namespace AcquisitionPlus.Entities.Entities
         public Guid? IdSupplier { get; set; }
         public Supplier Supplier { get; set; }
 
-        public PurchaseOrder PurchaseOrder { get; set; }
+        public ICollection<PurchaseOrder> PurchaseOrders { get; set; }
 
         public Guid? IdUnitOfMeasurement { get; set; }
         public UnitOfMeasurement UnitOfMeasurement { get; set; }

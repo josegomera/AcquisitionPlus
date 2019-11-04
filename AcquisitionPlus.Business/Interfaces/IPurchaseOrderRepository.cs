@@ -1,4 +1,5 @@
-﻿using AcquisitionPlus.Entities.Entities;
+﻿
+using AcquisitionPlus.Entities.Entities;
 
 namespace AcquisitionPlus.Business.Interfaces
 {

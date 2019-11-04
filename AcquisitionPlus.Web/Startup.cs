@@ -1,5 +1,6 @@
 using AcquisitionPlus.Business.Interfaces;
 using AcquisitionPlus.DAL.SQL;
+using AcquisitionPlus.Domain.handler;
 using AcquisitionPlus.Persistence.Generics;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -28,6 +29,7 @@ namespace AcquisitionPlus.Web
                options.UseSqlServer(Configuration.GetConnectionString("AcquisitionPlusDb")));
 
             services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IPurchaseOrderHandler, PurchaseOrderHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

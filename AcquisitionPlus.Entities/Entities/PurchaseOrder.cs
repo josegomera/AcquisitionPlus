@@ -16,10 +16,10 @@ namespace AcquisitionPlus.Entities.Entities
         public DateTime? UpdateDate { get; set; }
         public Status Status { get; set; }
 
-        public int IdProduct { get; set; }
+        public Guid? IdProduct { get; set; }
         public Product Product { get; set; }
 
-        public Guid IdEmployee { get; set; }
+        public Guid? IdEmployee { get; set; }
         public Employee Employee { get; set; }
 
     }

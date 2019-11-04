@@ -2,6 +2,7 @@
 using AcquisitionPlus.DAL.SQL;
 using AcquisitionPlus.Entities.Entities;
 using AcquisitionPlus.Persistence.Generics;
+using System;
 
 namespace AcquisitionPlus.Persistence.Repositories
 {

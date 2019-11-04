@@ -1,12 +1,13 @@
 ﻿using AcquisitionPlus.Entities.DTO;
+using AcquisitionPlus.Entities.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace AcquisitionPlus.Business.Interfaces
 {
-    public interface IPurchaseHandler
+    public interface IPurchaseOrderHandler
     {
-        void AddPurchaseOrder(AddPurchaseOrderDTO addPurchaseOrder);
+        void Execute(PurchaseOrder purchase);
     }
 }
