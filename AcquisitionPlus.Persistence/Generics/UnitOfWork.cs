@@ -21,7 +21,6 @@ namespace AcquisitionPlus.Persistence.Generics
             PurchaseOrder = new PurchaseOrderRepository(_context);
             Supplier = new SupplierRepository(_context);
             UnitOfMeasurement = new  UnitOfMeasurementRepository(_context);
-            Item = new ItemRepository(_context);
         }
         public IDepartmentRepository Department { get; private set; }
 
@@ -34,8 +33,6 @@ namespace AcquisitionPlus.Persistence.Generics
         public ISupplierRepository Supplier { get; private set; }
 
         public IUnitOfMeasurementRepository UnitOfMeasurement { get; private set; }
-
-        public IItemRepository Item { get; private set; }
 
         public int Complete()
         {

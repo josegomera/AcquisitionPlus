@@ -10,11 +10,7 @@ namespace AcquisitionPlus.DAL.EntityConfigurations
         {
             builder.ToTable("Products");
 
-            builder.HasKey(a => a.Id);
-
-            builder.HasOne(i => i.Item)
-                .WithOne(p => p.Product)
-                .HasForeignKey<Item>(i => i.IdProduct);
+            builder.HasKey(a => a.Id);        
         }
     }
 }
