@@ -8,6 +8,11 @@ table {
     margin-top: 20px;
 }
 
-button {
+.button-add {
   margin: 16px 83px;
+}
+
+.example-container {
+  position: relative;
+  min-height: 200px;
 }
