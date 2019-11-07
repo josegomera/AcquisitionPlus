@@ -9,6 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
+import {MatCardModule} from '@angular/material/card';
 
 
 
@@ -24,7 +25,8 @@ import {MatSortModule} from '@angular/material/sort';
     MatIconModule,
     MatListModule,
     MatTableModule,
-    MatSortModule
+    MatSortModule,
+    MatCardModule
   ],
   exports: [
     MatButtonModule,
@@ -35,7 +37,8 @@ import {MatSortModule} from '@angular/material/sort';
     MatIconModule,
     MatListModule,
     MatTableModule,
-    MatSortModule
+    MatSortModule,
+    MatCardModule
   ]
 })
 export class MaterialModule { }

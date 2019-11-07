@@ -22,7 +22,7 @@ export class PurchaseOrderListComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log("el payaso krusty");
+
   }
 
 }
