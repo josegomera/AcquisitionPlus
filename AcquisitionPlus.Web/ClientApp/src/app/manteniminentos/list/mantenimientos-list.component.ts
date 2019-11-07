@@ -1,34 +1,34 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit } from '@angular/core';
 
 export interface Section {
   name: string;
 }
 
 @Component({
-  selector: "app-mantenimientos-list",
-  templateUrl: "./mantenimientos-list.component.html",
-  styleUrls: ["./mantenimientos-list.component.css"]
+  selector: 'app-mantenimientos-list',
+  templateUrl: './mantenimientos-list.component.html',
+  styleUrls: ['./mantenimientos-list.component.css']
 })
 export class MantenimientosListComponent implements OnInit {
   mantenimientos: Section[] = [
     {
-      name: "Empleados"
+      name: 'Empleados'
     },
     {
-      name: "Departamentos"
+      name: 'Departamentos'
     },
     {
-      name: "Suplidores"
+      name: 'Suplidores'
     },
     {
-      name: "Productos"
+      name: 'Productos'
     },
     {
-      name: 'Unidades de Medidas'
+      name: 'Unidades'
     }
   ];
 
   constructor() {}
 
-  ngOnInit() {console.log('jeje');}
+  ngOnInit() {}
 }

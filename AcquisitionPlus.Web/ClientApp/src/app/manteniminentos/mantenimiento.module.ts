@@ -7,6 +7,7 @@ import { EmpleadosModule } from './empleados/empleados.module';
 import { DepartamentosModule } from './departamentos/departamentos.module';
 import { ProdutosModule } from './produtos/produtos.module';
 import { SuplidoresModule } from './suplidores/suplidores.module';
+import { UnidadesMedidasModule } from './unidades-medidas/unidades-medidas.module';
 
 @NgModule({
   declarations: [MantenimientosListComponent],
@@ -17,7 +18,8 @@ import { SuplidoresModule } from './suplidores/suplidores.module';
     EmpleadosModule,
     DepartamentosModule,
     ProdutosModule,
-    SuplidoresModule
+    SuplidoresModule,
+    UnidadesMedidasModule
   ]
 })
 export class MantenimientoModule { }
