@@ -6,6 +6,7 @@ import { MantenimientosListComponent } from './list/mantenimientos-list.componen
 import { EmpleadosModule } from './empleados/empleados.module';
 import { DepartamentosModule } from './departamentos/departamentos.module';
 import { ProdutosModule } from './produtos/produtos.module';
+import { SuplidoresModule } from './suplidores/suplidores.module';
 
 @NgModule({
   declarations: [MantenimientosListComponent],
@@ -15,7 +16,8 @@ import { ProdutosModule } from './produtos/produtos.module';
     MantenimientoRoutingModule,
     EmpleadosModule,
     DepartamentosModule,
-    ProdutosModule
+    ProdutosModule,
+    SuplidoresModule
   ]
 })
 export class MantenimientoModule { }
