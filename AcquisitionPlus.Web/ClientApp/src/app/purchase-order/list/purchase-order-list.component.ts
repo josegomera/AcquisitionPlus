@@ -6,18 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./purchase-order-list.component.css']
 })
 export class PurchaseOrderListComponent implements OnInit {
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  displayedColumns: string[] = ['orderNumber', 'amount','orderDate', 'unitCost', 'total', 'accion'];
   dataSource = [
-    {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-    {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-    {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-    {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-    {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-    {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-    {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-    {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-    {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-    {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
+    {orderNumber: 1, amount: 12, orderDate: new Date() , unitCost: 5000, total : 60000},
+    {orderNumber: 2, amount: 10, orderDate: new Date('09/05/2019') , unitCost: 1000, total: 10000},
+    {orderNumber: 3, amount: 3, orderDate: new Date('09/03/2014') , unitCost: 2000, total : 6000},
+    {orderNumber: 4, amount: 5, orderDate: new Date('02/05/2010') , unitCost: 3000, total: 15000}
   ];
   constructor() { }
 
