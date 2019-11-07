@@ -1,7 +1,7 @@
 <mat-list>
   <h3 mat-subheader>Mantenimientos</h3>
 
-  <mat-list-item *ngFor="let mant of mantenimientos" routerLink="." class="card">
+  <mat-list-item *ngFor="let mant of mantenimientos" [routerLink]="mant.name | lowercase" class="card">
     <mat-icon mat-list-icon>label_important</mat-icon>
     <h4 mat-line>{{ mant.name }}</h4>
     <mat-divider></mat-divider>
