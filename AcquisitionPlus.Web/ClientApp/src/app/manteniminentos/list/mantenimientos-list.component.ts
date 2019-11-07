@@ -15,20 +15,20 @@ export class MantenimientosListComponent implements OnInit {
       name: "Empleados"
     },
     {
-      name: "Productos"
-    },
-    {
       name: "Departamentos"
     },
     {
       name: "Suplidores"
     },
     {
-      name: "Unidades de Medidas"
+      name: "Productos"
+    },
+    {
+      name: 'Unidades de Medidas'
     }
   ];
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {console.log('jeje');}
 }

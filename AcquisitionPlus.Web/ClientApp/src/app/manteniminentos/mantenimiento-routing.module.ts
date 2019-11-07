@@ -6,7 +6,8 @@ import { MantenimientosListComponent } from './list/mantenimientos-list.componen
 
 const routes: Routes = [
   {path: '', component: MantenimientosListComponent},
-  {path: 'empleados', loadChildren: () => import('./empleados/empleados.module').then(p => p.EmpleadosModule)}
+  {path: 'empleados', loadChildren: () => import('./empleados/empleados.module').then(p => p.EmpleadosModule)},
+  {path: 'departamentos', loadChildren: () => import('./departamentos/departamentos.module').then(p => p.DepartamentosModule)}
 ];
 
 @NgModule({

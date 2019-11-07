@@ -4,6 +4,7 @@ import { MaterialModule } from '../material/material.module';
 import { MantenimientoRoutingModule } from './mantenimiento-routing.module';
 import { MantenimientosListComponent } from './list/mantenimientos-list.component';
 import { EmpleadosModule } from './empleados/empleados.module';
+import { DepartamentosModule } from './departamentos/departamentos.module';
 
 @NgModule({
   declarations: [MantenimientosListComponent],
@@ -11,7 +12,8 @@ import { EmpleadosModule } from './empleados/empleados.module';
     CommonModule,
     MaterialModule,
     MantenimientoRoutingModule,
-    EmpleadosModule
+    EmpleadosModule,
+    DepartamentosModule
   ]
 })
 export class MantenimientoModule { }
