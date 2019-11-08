@@ -23,7 +23,6 @@ export class UnidadesMedidasAddComponent implements OnInit {
     this.unitOfMeasureService.addUnitOfMeasure(this.unitMeasureForm.value).subscribe((data) => {
     this.router.navigate(['../'], {relativeTo: this.actRoute});
     });
-  
   }
 
 }

@@ -12,4 +12,8 @@ export class EmployeeService {
     getEmployees(){
         return this.http.get(`${environment.api}/Employees`);
     }
+
+    getListEmployees(){
+        return this.http.get(`${environment.api}/Employees/GetEmployees`);
+    }
 }

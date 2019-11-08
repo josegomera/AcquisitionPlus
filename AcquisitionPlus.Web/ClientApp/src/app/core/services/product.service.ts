@@ -12,4 +12,8 @@ export class ProductService {
     getProducts() {
         return this.http.get(`${environment.api}/Products`);
     }
+
+    getListProducts() {
+        return this.http.get(`${environment.api}/Products/GetProducts`);
+    }
 }

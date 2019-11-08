@@ -1,15 +1,19 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class PurchaseOrderService {
 
-    constructor(private http: HttpClient){
+    constructor(private http: HttpClient) {
 
     }
 
-    getPurchaseOrders(){
+    getPurchaseOrders() {
         return this.http.get(`${environment.api}/PurchaseOrders`);
+    }
+
+    addPurchaseOrders(payload) {
+        return this.http.post(`${environment.api}/PurchaseOrders`, payload);
     }
 }
