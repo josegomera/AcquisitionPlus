@@ -52,6 +52,7 @@ namespace AcquisitionPlus.Web
          
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IPurchaseOrderHandler, PurchaseOrderHandler>();
+            services.AddScoped<ISupplierRepositoryHandler, SupplierHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
