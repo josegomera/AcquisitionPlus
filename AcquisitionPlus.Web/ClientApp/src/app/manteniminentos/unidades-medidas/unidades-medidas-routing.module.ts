@@ -2,10 +2,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UnidadesMedidasListComponent } from './list/unidades-medidas-list.component';
 import { RouterModule, Routes } from '@angular/router';
+import { UnidadesMedidasAddComponent } from './add/unidades-medidas-add.component';
+import { UnitOfMeasureResolver } from 'src/app/core/resolvers/unitOfMeasure.resolver';
 
 
 const routes: Routes = [
-  {path: '', component: UnidadesMedidasListComponent}
+  {path: '', component: UnidadesMedidasListComponent, resolve: {units: UnitOfMeasureResolver}},
+  {path: 'add', component: UnidadesMedidasAddComponent}
 ];
 
 @NgModule({

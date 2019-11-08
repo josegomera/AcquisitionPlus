@@ -8,6 +8,7 @@ import { DepartamentosModule } from './departamentos/departamentos.module';
 import { ProdutosModule } from './produtos/produtos.module';
 import { SuplidoresModule } from './suplidores/suplidores.module';
 import { UnidadesMedidasModule } from './unidades-medidas/unidades-medidas.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [MantenimientosListComponent],
@@ -19,7 +20,8 @@ import { UnidadesMedidasModule } from './unidades-medidas/unidades-medidas.modul
     DepartamentosModule,
     ProdutosModule,
     SuplidoresModule,
-    UnidadesMedidasModule
+    UnidadesMedidasModule,
+    FormsModule
   ]
 })
 export class MantenimientoModule { }

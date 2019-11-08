@@ -28,6 +28,13 @@ namespace AcquisitionPlus.Web
             services.AddDbContextPool<AcquisitionPlusDbContext>(options =>
                options.UseSqlServer(Configuration.GetConnectionString("AcquisitionPlusDb")));
 
+
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IPurchaseOrderHandler, PurchaseOrderHandler>();
         }
@@ -45,6 +52,8 @@ namespace AcquisitionPlus.Web
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseCors("MyPolicy");
+
 
             app.UseEndpoints(endpoints =>
             {
