@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { PurchaseOrderListComponent } from './list/purchase-order-list.component';
 import { MaterialModule } from '../material/material.module';
 import { PurchaseOrderRoutingModule } from './purchase-order-routing.module';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -11,7 +12,8 @@ import { PurchaseOrderRoutingModule } from './purchase-order-routing.module';
   imports: [
     CommonModule,
     MaterialModule,
-    PurchaseOrderRoutingModule
+    PurchaseOrderRoutingModule,
+    FormsModule
   ]
 })
 export class PurchaseOrderModule { }

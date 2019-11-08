@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PurchaseOrderListComponent } from './list/purchase-order-list.component';
+import { PurchaseOrderResolver } from '../core/resolvers/purchaseorder.resolver';
 
 
 const routes: Routes = [
-  {path: '', component: PurchaseOrderListComponent}
+  {path: '', component: PurchaseOrderListComponent, resolve: {purchase: PurchaseOrderResolver }}
 ];
 
 @NgModule({

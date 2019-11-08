@@ -29,7 +29,10 @@ export class UnidadesMedidaEditComponent implements OnInit {
   }
 
   save(){
-
+    let unitToBeEdit = {...this.unitOfMeasureToEdit, ...this.unitMeasureForm.value};
+    this.unitOfMeasureService.updateUnitMeasure(unitToBeEdit).subscribe((data) => {
+      this.router.navigate(['../../'], {relativeTo: this.actRoute});
+    });
   
   }
 

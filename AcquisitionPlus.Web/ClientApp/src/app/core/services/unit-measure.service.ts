@@ -20,4 +20,8 @@ export class UnitMeasureService {
     addUnitOfMeasure(payload){
         return this.http.post(`${environment.api}/UnitOfMeasurements`,payload);
     }
+
+    updateUnitMeasure(updateUnitMeasure){
+        return this.http.put(`${environment.api}/UnitOfMeasurements`,updateUnitMeasure);
+    }
 }
