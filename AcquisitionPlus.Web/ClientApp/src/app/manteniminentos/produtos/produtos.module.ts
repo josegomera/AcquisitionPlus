@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MaterialModule } from 'src/app/material/material.module';
 import { ProdutosListComponent } from './list/produtos-list.component';
 import { ProdutosRoutigModule } from './produtos-routig.module';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -11,7 +12,8 @@ import { ProdutosRoutigModule } from './produtos-routig.module';
   imports: [
     CommonModule,
     MaterialModule,
-    ProdutosRoutigModule
+    ProdutosRoutigModule,
+    FormsModule
   ]
 })
 export class ProdutosModule { }

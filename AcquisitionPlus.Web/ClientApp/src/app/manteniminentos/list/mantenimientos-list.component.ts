@@ -12,19 +12,19 @@ export interface Section {
 export class MantenimientosListComponent implements OnInit {
   mantenimientos: Section[] = [
     {
-      name: 'Empleados'
+      name: 'Employees'
     },
     {
-      name: 'Departamentos'
+      name: 'Departments'
     },
     {
-      name: 'Suplidores'
+      name: 'Products'
     },
     {
-      name: 'Productos'
+      name: 'Suppliers'
     },
     {
-      name: 'Unidades'
+      name: 'Units'
     }
   ];
 
