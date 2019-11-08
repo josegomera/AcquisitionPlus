@@ -13,6 +13,10 @@ export class UnitMeasureService {
         return this.http.get(`${environment.api}/UnitOfMeasurements`);
     }
 
+    getUnitOfMeasure(id){
+        return this.http.get(`${environment.api}/UnitOfMeasurements/${id}`);
+    }
+
     addUnitOfMeasure(payload){
         return this.http.post(`${environment.api}/UnitOfMeasurements`,payload);
     }
