@@ -20,6 +20,7 @@ namespace AcquisitionPlus.Persistence.Repositories
         {
             var Actproduct = Get(product.Id);
             Actproduct.Description = product.Description;
+            Actproduct.Brand = product.Brand;
             Actproduct.Status = product.Status;
             Actproduct.Stock = product.Stock;
             Actproduct.IdSupplier = product.IdSupplier;
