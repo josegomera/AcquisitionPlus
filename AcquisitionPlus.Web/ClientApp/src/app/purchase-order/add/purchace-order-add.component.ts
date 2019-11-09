@@ -13,7 +13,7 @@ export class PurchaceOrderAddComponent implements OnInit {
   puchaseOrderForm: FormGroup;
   listEmployee: any;
   listProduct: any;
-  buttonNameDisplay: string = "Guardar";
+  buttonNameDisplay: string = "Save";
   id: number;
   purchaseOrderEdit;
   constructor(
@@ -38,7 +38,7 @@ export class PurchaceOrderAddComponent implements OnInit {
 
     this.id = this.actRoute.snapshot.params.id;
     if (this.id != 0) {
-      this.buttonNameDisplay = "Actualizar";
+      this.buttonNameDisplay = "Update";
       this.purchase.getPurchaseOrderById(this.id).subscribe(data => {
         this.purchaseOrderEdit = data;
         this.puchaseOrderForm.patchValue(data);

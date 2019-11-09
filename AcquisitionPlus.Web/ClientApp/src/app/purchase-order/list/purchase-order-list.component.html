@@ -1,13 +1,14 @@
 <div class="container">
+
   <div class="row">
     <div class="col-6">
-      <h2>Purchase Orders</h2>
+      <h2 style="margin-top: 20px;">Purchase Orders</h2>
     </div>
   </div>
   <br>
   <div class="row">
     <div class="col-6">
-      <button class="button-add" mat-raised-button color="warn" [routerLink]="['add', 0]"> New Purchase</button>
+      <button class="button-add" mat-raised-button color="primary" [routerLink]="['add', 0]"> New Purchase</button>
     </div>
   </div>
   <br>
@@ -52,7 +53,7 @@
           <ng-container matColumnDef="accion">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
             <td mat-cell *matCellDef="let element">
-              <button mat-raised-button color="accent" [routerLink]="['add',element.id]"> Edit</button> </td>
+              <button mat-stroked-button color="primary" [routerLink]="['add',element.id]"> Edit</button> </td>
           </ng-container>
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
