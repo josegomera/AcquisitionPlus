@@ -1,17 +1,21 @@
-import { Component, OnInit, AfterViewInit } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Router, ActivatedRoute } from "@angular/router";
 import { PurchaseOrderService } from "src/app/core/services/purchase-order.service";
+import { Subscription, Observable } from 'rxjs';
 
 @Component({
   selector: "app-purchace-order-add",
   templateUrl: "./purchace-order-add.component.html",
   styleUrls: ["./purchace-order-add.component.css"]
 })
-export class PurchaceOrderAddComponent implements OnInit, AfterViewInit {
+export class PurchaceOrderAddComponent implements OnInit {
   puchaseOrderForm: FormGroup;
   listEmployee;
   listProduct;
+  buttonNameDisplay: string = "Guardar";
+  id: number;
+  purchaseOrderEdit ;
   constructor(
     private fb: FormBuilder,
     private purchase: PurchaseOrderService,
@@ -20,46 +24,61 @@ export class PurchaceOrderAddComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit() {
+    console.log(this.actRoute.snapshot.params.id);
     this.puchaseOrderForm = this.fb.group({
       amount: [null, [Validators.required]],
       unitCost: [null, [Validators.required]],
       idEmployee: [null, [Validators.required]],
-      idProduct: [null, [Validators.required]]
+      idProduct: [null, [Validators.required]],
+      total: [{ 'disabled': true, 'value': null }]
     });
     this.actRoute.data.subscribe(data => {
       this.listEmployee = data.listEmployee;
       this.listProduct = data.listProduct;
     });
+
+    this.id = this.actRoute.snapshot.params.id;
+    if (this.id != 0) {
+      this.buttonNameDisplay = "Actualizar";
+      this.purchase.getPurchaseOrderById(this.id).subscribe(data => {
+        this.purchaseOrderEdit = data;
+        this.puchaseOrderForm.patchValue(data);
+        this.totalCalculation();
+      });
+    }
+
   }
 
-  ngAfterViewInit(): void {
-    // this.checkInvalid();
-  }
-
-  checkInvalid() {
-    const invalid = [];
-    console.log(this.puchaseOrderForm);
-    // const controls = this.puchaseOrderForm.controls;
-    // for (const name in controls) {
-    //   if (controls[name].invalid) {
-    //     invalid.push(name);
-    //   }
-    // }
-    return invalid;
-  }
 
   save() {
-    let unitCostControl = this.puchaseOrderForm.get('unitCost');
-    unitCostControl.setValue(+unitCostControl.value);
+    // let unitCostControl = this.puchaseOrderForm.get('unitCost');
+    // unitCostControl.setValue(+unitCostControl.value);
 
-    unitCostControl.updateValueAndValidity();
+    // unitCostControl.updateValueAndValidity();
 
-    console.log(this.puchaseOrderForm.value);
-    this.purchase.addPurchaseOrders(this.puchaseOrderForm.value).subscribe(
+    // console.log(this.puchaseOrderForm.value);
+    let result$ =  new Observable();
+    if (this.id == 0) {
+
+     result$ = this.purchase.addPurchaseOrders(this.puchaseOrderForm.value);
+    } else {
+      var purchaseOrderToUpdate = {...this.purchaseOrderEdit, ...this.puchaseOrderForm.value };
+     result$ = this.purchase.updatePurchaseOrders(purchaseOrderToUpdate);
+
+    }
+
+    result$.subscribe(
       data => {
-        this.router.navigate(["../"], { relativeTo: this.actRoute });
+        this.router.navigate(["../../"], { relativeTo: this.actRoute });
       },
       error => console.log(error)
     );
+  }
+
+  totalCalculation(){
+    let amount = this.puchaseOrderForm.get('amount');
+    let unitCost = this.puchaseOrderForm.get('unitCost');
+    let total = +amount.value * +unitCost.value;
+    this.puchaseOrderForm.get('total').setValue(total);
   }
 }

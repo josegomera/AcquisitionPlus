@@ -15,7 +15,6 @@ import { NgSelectModule } from '@ng-select/ng-select';
     CommonModule,
     MaterialModule,
     PurchaseOrderRoutingModule,
-    FormsModule,
     ReactiveFormsModule,
     NgxMaskModule.forRoot(),
     NgSelectModule

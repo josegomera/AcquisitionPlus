@@ -9,7 +9,7 @@ import { ListProductResolver } from '../core/resolvers/listProducts.resolver';
 
 const routes: Routes = [
   {path: '', component: PurchaseOrderListComponent, resolve: {purchase: PurchaseOrderResolver }},
-  {path: 'add', component: PurchaceOrderAddComponent, resolve: {listEmployee: ListEmployeeResolver, listProduct: ListProductResolver }}
+  {path: 'add/:id', component: PurchaceOrderAddComponent, resolve: {listEmployee: ListEmployeeResolver, listProduct: ListProductResolver }}
 ];
 
 @NgModule({

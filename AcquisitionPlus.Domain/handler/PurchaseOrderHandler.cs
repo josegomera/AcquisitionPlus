@@ -42,8 +42,9 @@ namespace AcquisitionPlus.Domain.handler
             var old = _unitOfWork.PurchaseOrder.Get(purchase.Id);
             old.Amount = purchase.Amount;
             old.UnitCost = purchase.UnitCost;
-            old.UpdateDate = purchase.UpdateDate;
+            old.UpdateDate = DateTime.UtcNow.AddMinutes(-240);
             old.Status = purchase.Status;
+            old.Total = purchase.Amount * purchase.UnitCost;
         }
     }
 }

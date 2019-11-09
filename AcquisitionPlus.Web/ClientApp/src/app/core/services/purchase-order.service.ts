@@ -13,7 +13,15 @@ export class PurchaseOrderService {
         return this.http.get(`${environment.api}/PurchaseOrders`);
     }
 
+    getPurchaseOrderById(id) {
+      return this.http.get(`${environment.api}/PurchaseOrders/${id}`);
+  }
+
     addPurchaseOrders(payload) {
         return this.http.post(`${environment.api}/PurchaseOrders`, payload);
     }
+
+    updatePurchaseOrders(payload) {
+      return this.http.put(`${environment.api}/PurchaseOrders`, payload);
+  }
 }
