@@ -36,5 +36,14 @@ namespace AcquisitionPlus.Domain.handler
             product.UpdateDate = DateTime.UtcNow.AddMinutes(-240);
             _unitOfWork.Product.Update(product);
         }
+
+        public void Update(PurchaseOrder purchase)
+        {
+            var old = _unitOfWork.PurchaseOrder.Get(purchase.Id);
+            old.Amount = purchase.Amount;
+            old.UnitCost = purchase.UnitCost;
+            old.UpdateDate = purchase.UpdateDate;
+            old.Status = purchase.Status;
+        }
     }
 }

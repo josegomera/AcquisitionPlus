@@ -9,8 +9,8 @@
                     <div class="col-6">
                         <div class="form-group">
                             <label for="">Employee</label>
-                            <ng-select [items]="listEmployee" bindLabel="fullName" autofocus bindValue="idEmployee"
-                                formControlName="Employee">
+                            <ng-select [items]="listEmployee" bindLabel="fullName" autofocus bindValue="id"
+                                formControlName="idEmployee">
                             </ng-select>
                         </div>
                     </div>
@@ -18,8 +18,8 @@
                     <div class="col-6">
                         <div class="form-group">
                             <label for="">Product</label>
-                            <ng-select [items]="listProduct" bindLabel="product" autofocus bindValue="idProduct"
-                            formControlName="Product">
+                            <ng-select [items]="listProduct" bindLabel="product" autofocus bindValue="id"
+                            formControlName="idProduct">
                         </ng-select>
                         </div>
                     </div>
@@ -28,15 +28,14 @@
                     <div class="col-6">
                         <div class="form-group">
                             <label for="">Amount</label>
-                            <input type="number" class="form-control" formControlName="Amount">
+                            <input type="number" class="form-control" formControlName="amount">
                         </div>
                     </div>
-
+<!-- //mask="separator.2" thousandSeparator="," prefix="RD$ " [dropSpecialCharacters]="false" -->
                     <div class="col-6">
                         <div class="form-group">
-                            <label for="">Unit Price</label>
-                            <input type="text" class="form-control" mask="separator.2" thousandSeparator=","
-                                prefix="RD$ " formControlName="UnitCost">
+                            <label for="">Unit Cost</label>
+                            <input type="number" class="form-control"   formControlName="unitCost">
                         </div>
                     </div>
                 </div>
@@ -51,6 +50,9 @@
                     <button class="btn btn-primary btn-block" (click)="puchaseOrderForm.reset()">Limpiar</button>
                 </div>
 
+                <!-- <div class="col-4">
+                    <button class="btn btn-primary btn-block" (click)="checkInvalid()">Prueba</button>
+                </div> -->
 
                 <div class="col-4">
                     <button class="btn btn-info btn-block" [disabled]="puchaseOrderForm.invalid"

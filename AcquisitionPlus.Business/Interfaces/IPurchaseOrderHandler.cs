@@ -9,5 +9,7 @@ namespace AcquisitionPlus.Business.Interfaces
     public interface IPurchaseOrderHandler
     {
         void Execute(PurchaseOrder purchase);
+
+        void Update(PurchaseOrder purchase);
     }
 }
