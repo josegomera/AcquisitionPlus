@@ -1,27 +1,31 @@
-import {Injectable} from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { environment } from "src/environments/environment";
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: "root" })
 export class UnitMeasureService {
+  constructor(private http: HttpClient) {}
 
-    constructor(private http: HttpClient){
+  getUnitOfMeasures() {
+    return this.http.get(`${environment.api}/UnitOfMeasurements`);
+  }
 
-    }
+  getUnitOfMeasure(id) {
+    return this.http.get(`${environment.api}/UnitOfMeasurements/${id}`);
+  }
 
-    getUnitOfMeasures(){
-        return this.http.get(`${environment.api}/UnitOfMeasurements`);
-    }
+  getListUnitOfMeasure() {
+    return this.http.get(`${environment.api}/UnitOfMeasurements/GetUnits`);
+  }
 
-    getUnitOfMeasure(id){
-        return this.http.get(`${environment.api}/UnitOfMeasurements/${id}`);
-    }
+  addUnitOfMeasure(payload) {
+    return this.http.post(`${environment.api}/UnitOfMeasurements`, payload);
+  }
 
-    addUnitOfMeasure(payload){
-        return this.http.post(`${environment.api}/UnitOfMeasurements`,payload);
-    }
-
-    updateUnitMeasure(updateUnitMeasure){
-        return this.http.put(`${environment.api}/UnitOfMeasurements`,updateUnitMeasure);
-    }
+  updateUnitMeasure(updateUnitMeasure) {
+    return this.http.put(
+      `${environment.api}/UnitOfMeasurements`,
+      updateUnitMeasure
+    );
+  }
 }

@@ -1,19 +1,16 @@
-import {Injectable} from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { environment } from "src/environments/environment";
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: "root" })
 export class EmployeeService {
+  constructor(private http: HttpClient) {}
 
-    constructor(private http: HttpClient){
+  getEmployees() {
+    return this.http.get(`${environment.api}/Employees`);
+  }
 
-    }
-
-    getEmployees(){
-        return this.http.get(`${environment.api}/Employees`);
-    }
-
-    getListEmployees(){
-        return this.http.get(`${environment.api}/Employees/GetEmployees`);
-    }
+  getListEmployees() {
+    return this.http.get(`${environment.api}/Employees/GetEmployees`);
+  }
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Router, ActivatedRoute } from "@angular/router";
 import { PurchaseOrderService } from "src/app/core/services/purchase-order.service";
-import { Subscription, Observable } from 'rxjs';
+import {  Observable } from "rxjs";
 
 @Component({
   selector: "app-purchace-order-add",
@@ -15,7 +15,7 @@ export class PurchaceOrderAddComponent implements OnInit {
   listProduct;
   buttonNameDisplay: string = "Guardar";
   id: number;
-  purchaseOrderEdit ;
+  purchaseOrderEdit;
   constructor(
     private fb: FormBuilder,
     private purchase: PurchaseOrderService,
@@ -24,13 +24,12 @@ export class PurchaceOrderAddComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log(this.actRoute.snapshot.params.id);
     this.puchaseOrderForm = this.fb.group({
       amount: [null, [Validators.required]],
       unitCost: [null, [Validators.required]],
       idEmployee: [null, [Validators.required]],
       idProduct: [null, [Validators.required]],
-      total: [{ 'disabled': true, 'value': null }]
+      total: [{ disabled: true, value: null }]
     });
     this.actRoute.data.subscribe(data => {
       this.listEmployee = data.listEmployee;
@@ -46,25 +45,18 @@ export class PurchaceOrderAddComponent implements OnInit {
         this.totalCalculation();
       });
     }
-
   }
 
-
   save() {
-    // let unitCostControl = this.puchaseOrderForm.get('unitCost');
-    // unitCostControl.setValue(+unitCostControl.value);
-
-    // unitCostControl.updateValueAndValidity();
-
-    // console.log(this.puchaseOrderForm.value);
-    let result$ =  new Observable();
+    let result$ = new Observable();
     if (this.id == 0) {
-
-     result$ = this.purchase.addPurchaseOrders(this.puchaseOrderForm.value);
+      result$ = this.purchase.addPurchaseOrders(this.puchaseOrderForm.value);
     } else {
-      var purchaseOrderToUpdate = {...this.purchaseOrderEdit, ...this.puchaseOrderForm.value };
-     result$ = this.purchase.updatePurchaseOrders(purchaseOrderToUpdate);
-
+      var purchaseOrderToUpdate = {
+        ...this.purchaseOrderEdit,
+        ...this.puchaseOrderForm.value
+      };
+      result$ = this.purchase.updatePurchaseOrders(purchaseOrderToUpdate);
     }
 
     result$.subscribe(
@@ -75,10 +67,10 @@ export class PurchaceOrderAddComponent implements OnInit {
     );
   }
 
-  totalCalculation(){
-    let amount = this.puchaseOrderForm.get('amount');
-    let unitCost = this.puchaseOrderForm.get('unitCost');
+  totalCalculation() {
+    let amount = this.puchaseOrderForm.get("amount");
+    let unitCost = this.puchaseOrderForm.get("unitCost");
     let total = +amount.value * +unitCost.value;
-    this.puchaseOrderForm.get('total').setValue(total);
+    this.puchaseOrderForm.get("total").setValue(total);
   }
 }
