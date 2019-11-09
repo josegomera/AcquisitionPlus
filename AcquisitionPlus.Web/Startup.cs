@@ -4,6 +4,7 @@ using AcquisitionPlus.Domain.handler;
 using AcquisitionPlus.Persistence.Generics;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,8 +31,6 @@ namespace AcquisitionPlus.Web
                 options.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.DefaultContractResolver();
                 options.UseMemberCasing();
                 
-
-
             }).ConfigureApiBehaviorOptions(options =>
             {
                 options.SuppressModelStateInvalidFilter = true;
@@ -49,7 +48,12 @@ namespace AcquisitionPlus.Web
                        .AllowAnyHeader();
             }));
 
-         
+            //services.AddSpaStaticFiles(configuration =>
+            //{
+            //    configuration.RootPath = "ClientApp/dist";
+            //});
+
+
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IPurchaseOrderHandler, PurchaseOrderHandler>();
             services.AddScoped<ISupplierRepositoryHandler, SupplierHandler>();
@@ -62,10 +66,28 @@ namespace AcquisitionPlus.Web
             {
                 app.UseDeveloperExceptionPage();
             }
+            //app.UseStaticFiles();
+            //if (!env.IsDevelopment())
+            //{
+            //    app.UseSpaStaticFiles();
+            //}
 
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            //app.UseSpa(spa =>
+            //{
+            //    // To learn more about options for serving an Angular SPA from ASP.NET Core,
+            //    // see https://go.microsoft.com/fwlink/?linkid=864501
+
+            //    spa.Options.SourcePath = "ClientApp";
+
+            //    if (env.IsDevelopment())
+            //    {
+            //        spa.UseAngularCliServer(npmScript: "start");
+            //    }
+            //});
 
             app.UseAuthorization();
             app.UseCors("MyPolicy");

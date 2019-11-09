@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Router, ActivatedRoute } from "@angular/router";
 import { PurchaseOrderService } from "src/app/core/services/purchase-order.service";
-import {  Observable } from "rxjs";
+import { Observable } from "rxjs";
 
 @Component({
   selector: "app-purchace-order-add",
@@ -11,8 +11,8 @@ import {  Observable } from "rxjs";
 })
 export class PurchaceOrderAddComponent implements OnInit {
   puchaseOrderForm: FormGroup;
-  listEmployee;
-  listProduct;
+  listEmployee: any;
+  listProduct: any;
   buttonNameDisplay: string = "Guardar";
   id: number;
   purchaseOrderEdit;
@@ -21,7 +21,7 @@ export class PurchaceOrderAddComponent implements OnInit {
     private purchase: PurchaseOrderService,
     private router: Router,
     private actRoute: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.puchaseOrderForm = this.fb.group({
@@ -73,4 +73,6 @@ export class PurchaceOrderAddComponent implements OnInit {
     let total = +amount.value * +unitCost.value;
     this.puchaseOrderForm.get("total").setValue(total);
   }
+
+  
 }
