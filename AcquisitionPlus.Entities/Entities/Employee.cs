@@ -17,7 +17,7 @@ namespace AcquisitionPlus.Entities.Entities
         public Status Status { get; set; }
 
         //Relationship
-        public Guid? IdDepartment { get; set; }
+        public Guid IdDepartment { get; set; }
         public Department Department { get; set; }
         public ICollection<PurchaseOrder> PurchaseOrders { get; set; }
     }

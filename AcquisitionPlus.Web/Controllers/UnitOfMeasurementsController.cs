@@ -20,10 +20,7 @@ namespace AcquisitionPlus.Web.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        /// <summary>
-        /// Get all the UnitOfMeasurement
-        /// </summary>
-        /// <returns></returns>
+
         [HttpGet]
         public IActionResult Get()
         {
@@ -37,11 +34,6 @@ namespace AcquisitionPlus.Web.Controllers
             }
         }
 
-        /// <summary>
-        /// Get UnitOfMeasurement by Id(GUID)
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
         [HttpGet]
         [Route("{id:Guid}")]
         public IActionResult Get(Guid id)
@@ -58,11 +50,22 @@ namespace AcquisitionPlus.Web.Controllers
             }
         }
 
-        /// <summary>
-        /// Add a UnitOfMeasurement
-        /// </summary>
-        /// <param name="unitOfMeasurement"></param>
-        /// <returns></returns>
+        [HttpGet]
+        [Route("GetUnits")]
+        public IActionResult GetUnits()
+        {
+            try
+            {
+                var unit = _unitOfWork.UnitOfMeasurement.GetAll().Select(x => new { x.Id, Unit = x.Description }).ToList();
+
+                return StatusCode(200, unit);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+
         [HttpPost]
         public IActionResult Add(UnitOfMeasurement unitOfMeasurement)
         {
@@ -84,11 +87,6 @@ namespace AcquisitionPlus.Web.Controllers
             }
         }
 
-        /// <summary>
-        /// Update a UnitOfMeasurement
-        /// </summary>
-        /// <param name="unitOfMeasurement"></param>
-        /// <returns></returns>
         [HttpPut]
         public IActionResult Update(UnitOfMeasurement unitOfMeasurement)
         {

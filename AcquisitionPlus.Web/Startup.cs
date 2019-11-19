@@ -4,6 +4,7 @@ using AcquisitionPlus.Domain.handler;
 using AcquisitionPlus.Persistence.Generics;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,13 +24,33 @@ namespace AcquisitionPlus.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(options =>
+            {
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
+                options.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.DefaultContractResolver();
+                options.UseMemberCasing();
+                
+            }).ConfigureApiBehaviorOptions(options =>
+            {
+                options.SuppressModelStateInvalidFilter = true;
+
+            });
 
             services.AddDbContextPool<AcquisitionPlusDbContext>(options =>
                options.UseSqlServer(Configuration.GetConnectionString("AcquisitionPlusDb")));
 
+
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
+
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IPurchaseOrderHandler, PurchaseOrderHandler>();
+            services.AddScoped<ISupplierRepositoryHandler, SupplierHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,12 +60,15 @@ namespace AcquisitionPlus.Web
             {
                 app.UseDeveloperExceptionPage();
             }
+            
 
             app.UseHttpsRedirection();
 
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseCors("MyPolicy");
+
 
             app.UseEndpoints(endpoints =>
             {

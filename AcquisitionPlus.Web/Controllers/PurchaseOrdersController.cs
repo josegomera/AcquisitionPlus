@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AcquisitionPlus.Web.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     public class PurchaseOrdersController : ControllerBase
     {
@@ -58,6 +58,23 @@ namespace AcquisitionPlus.Web.Controllers
 
                 _handler.Execute(purchase);
                 
+                return StatusCode(201, _unitOfWork.Complete());
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+
+        [HttpPut]
+        public IActionResult Update(PurchaseOrder purchase)
+        {
+            try
+            {
+                if (purchase == null) return StatusCode(400, new { ErroMessage = "Object is Null" });
+
+                _handler.Update(purchase);
+
                 return StatusCode(201, _unitOfWork.Complete());
             }
             catch (Exception e)
