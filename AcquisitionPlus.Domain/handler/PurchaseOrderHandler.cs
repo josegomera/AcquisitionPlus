@@ -1,6 +1,7 @@
 ﻿using AcquisitionPlus.Business.Interfaces;
 using AcquisitionPlus.Entities.DTO;
 using AcquisitionPlus.Entities.Entities;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,6 +15,14 @@ namespace AcquisitionPlus.Domain.handler
         public PurchaseOrderHandler(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
+        }
+
+        public void Contabilize(JObject data)
+        {
+            var accountingEntryDebit = new
+            {
+        
+            };
         }
 
         public void Execute(PurchaseOrder purchase)
