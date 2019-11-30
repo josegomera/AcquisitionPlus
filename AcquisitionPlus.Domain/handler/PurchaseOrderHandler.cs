@@ -25,6 +25,27 @@ namespace AcquisitionPlus.Domain.handler
             };
         }
 
+        /*{
+	        "accountingEntryDebit": {
+	            "description": "Pago de Nomina abri; 2019",
+	            "auxiliaryAccountId": 7,
+	            "account": "80",
+	            "movementType": 1,
+	            "period": "2019-12-01T04:22:45.253Z",
+	            "amount": 80000,
+	            "currencyTypeId": 1
+          },
+         "accountingEntryCredit": {
+	            "description": "Pago de Nomina abri 2019",
+	            "auxiliaryAccountId": 7,
+	            "account": "4",
+	            "movementType": 1,
+	            "period": "2019-12-01T04:22:45.253Z",
+	            "amount": 80000,
+	            "currencyTypeId": 1
+	        }	
+        }*/
+
         public void Execute(PurchaseOrder purchase)
         {
             //Create a Purchase Order
