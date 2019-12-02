@@ -17,12 +17,37 @@ namespace AcquisitionPlus.Domain.handler
             _unitOfWork = unitOfWork;
         }
 
-        public void Contabilize(JObject data)
+        public dynamic Contabilize(AsientosDTO data)
         {
             var accountingEntryDebit = new
             {
-        
+                data.description,
+                auxiliaryAccountId = 8,
+                account = "80",
+                movementType = 1,
+                period = DateTime.UtcNow.AddMinutes(-240),
+                data.amount,
+                currencyTypeId = 1
             };
+
+            var accountingEntryCredit = new
+            {
+                data.description,
+                auxiliaryAccountId = 8,
+                account = "4",
+                movementType = 1,
+                period = DateTime.UtcNow.AddMinutes(-240),
+                data.amount,
+                currencyTypeId = 1
+            };
+
+            var Json = new
+            {
+                accountingEntryDebit,
+                accountingEntryCredit
+            };
+
+            return Json;
         }
 
         /*{

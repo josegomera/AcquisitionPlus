@@ -13,6 +13,6 @@ namespace AcquisitionPlus.Business.Interfaces
 
         void Update(PurchaseOrder purchase);
 
-        void Contabilize(JObject data);
+        dynamic Contabilize(AsientosDTO data);
     }
 }
