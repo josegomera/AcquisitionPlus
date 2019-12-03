@@ -1,4 +1,5 @@
-﻿using AcquisitionPlus.Entities.DTO;
+﻿using AcquisitionPlus.Business.Interfaces.Services;
+using AcquisitionPlus.Entities.DTO;
 using AcquisitionPlus.Entities.Entities;
 using Newtonsoft.Json.Linq;
 using System;
@@ -13,6 +14,6 @@ namespace AcquisitionPlus.Business.Interfaces
 
         void Update(PurchaseOrder purchase);
 
-        dynamic Contabilize(AsientosDTO data);
+        dynamic Contabilize(AsientosDTO data, IPostEntriesService postEntriesService);
     }
 }

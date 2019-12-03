@@ -1,10 +1,11 @@
 using AcquisitionPlus.Business.Interfaces;
+using AcquisitionPlus.Business.Interfaces.Services;
 using AcquisitionPlus.DAL.SQL;
 using AcquisitionPlus.Domain.handler;
 using AcquisitionPlus.Persistence.Generics;
+using AcquisitionPlus.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -51,6 +52,7 @@ namespace AcquisitionPlus.Web
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IPurchaseOrderHandler, PurchaseOrderHandler>();
             services.AddScoped<ISupplierRepositoryHandler, SupplierHandler>();
+            services.AddTransient<IPostEntriesService, PostEntriesService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

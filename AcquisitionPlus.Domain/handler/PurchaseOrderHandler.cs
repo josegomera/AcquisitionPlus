@@ -1,4 +1,5 @@
 ﻿using AcquisitionPlus.Business.Interfaces;
+using AcquisitionPlus.Business.Interfaces.Services;
 using AcquisitionPlus.Entities.DTO;
 using AcquisitionPlus.Entities.Entities;
 using Newtonsoft.Json.Linq;
@@ -17,7 +18,7 @@ namespace AcquisitionPlus.Domain.handler
             _unitOfWork = unitOfWork;
         }
 
-        public dynamic Contabilize(AsientosDTO data)
+        public dynamic Contabilize(AsientosDTO data, IPostEntriesService postEntriesService)
         {
             var accountingEntryDebit = new
             {
@@ -47,29 +48,31 @@ namespace AcquisitionPlus.Domain.handler
                 accountingEntryCredit
             };
 
-            return Json;
+            var result = postEntriesService.PostEntries(Json);
+
+            return result;
         }
 
         /*{
-	        "accountingEntryDebit": {
-	            "description": "Pago de Nomina abri; 2019",
-	            "auxiliaryAccountId": 7,
-	            "account": "80",
-	            "movementType": 1,
-	            "period": "2019-12-01T04:22:45.253Z",
-	            "amount": 80000,
-	            "currencyTypeId": 1
-          },
-         "accountingEntryCredit": {
-	            "description": "Pago de Nomina abri 2019",
-	            "auxiliaryAccountId": 7,
-	            "account": "4",
-	            "movementType": 1,
-	            "period": "2019-12-01T04:22:45.253Z",
-	            "amount": 80000,
-	            "currencyTypeId": 1
-	        }	
-        }*/
+			"accountingEntryDebit": {
+				"description": "Pago de Nomina abri; 2019",
+				"auxiliaryAccountId": 7,
+				"account": "80",
+				"movementType": 1,
+				"period": "2019-12-01T04:22:45.253Z",
+				"amount": 80000,
+				"currencyTypeId": 1
+		  },
+		 "accountingEntryCredit": {
+				"description": "Pago de Nomina abri 2019",
+				"auxiliaryAccountId": 7,
+				"account": "4",
+				"movementType": 1,
+				"period": "2019-12-01T04:22:45.253Z",
+				"amount": 80000,
+				"currencyTypeId": 1
+			}	
+		}*/
 
         public void Execute(PurchaseOrder purchase)
         {

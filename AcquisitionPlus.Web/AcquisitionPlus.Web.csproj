@@ -36,6 +36,7 @@
     <ProjectReference Include="..\AcquisitionPlus.Domain\AcquisitionPlus.Domain.csproj" />
     <ProjectReference Include="..\AcquisitionPlus.Entities\AcquisitionPlus.Entities.csproj" />
     <ProjectReference Include="..\AcquisitionPlus.Persistence\AcquisitionPlus.Persistence.csproj" />
+    <ProjectReference Include="..\AcquisitionPlus.Services\AcquisitionPlus.Services.csproj" />
   </ItemGroup>
 
 </Project>
