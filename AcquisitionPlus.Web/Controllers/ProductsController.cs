@@ -55,8 +55,10 @@ namespace AcquisitionPlus.Web.Controllers
         {
             try
             {
-                var products = _unitOfWork.Product.GetAll().Select(x => new { x.Id, Product = x.Description, x.Stock}).ToList();
-         
+                var products = _unitOfWork.Product.GetAll()
+                    .Where(s => s.Stock != 0)
+                    .Select(x => new { x.Id, Product = x.Description, x.Stock}).ToList();
+
                 return StatusCode(200, products);
             }
             catch (Exception e)
