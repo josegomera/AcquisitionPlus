@@ -61,7 +61,7 @@ namespace AcquisitionPlus.Web.Controllers
             try
             {
                 if (asientos == null) return StatusCode(400, new { ErrorMessage = "Object is Null" });
-
+                    
                 return StatusCode(200, _handler.Contabilize(asientos, _postEntriesService));
             }
             catch (Exception e)
