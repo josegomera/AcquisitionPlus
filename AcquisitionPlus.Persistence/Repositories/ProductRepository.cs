@@ -23,6 +23,7 @@ namespace AcquisitionPlus.Persistence.Repositories
             Actproduct.Brand = product.Brand;
             Actproduct.Status = product.Status;
             Actproduct.Stock = product.Stock;
+            Actproduct.UnitCost = product.UnitCost;
             Actproduct.IdSupplier = product.IdSupplier;
             Actproduct.IdUnitOfMeasurement = product.IdUnitOfMeasurement;
             Actproduct.UpdateDate = product.UpdateDate;
