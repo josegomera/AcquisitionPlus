@@ -50,10 +50,11 @@ namespace AcquisitionPlus.Domain.handler
                 accountingEntryCredit
             };
 
+            var result = postEntriesService.PostEntries(Json);
 
             _unitOfWork.PurchaseOrder.desactivatePurchases(data.purchaseOrders);
 
-            var result = postEntriesService.PostEntries(Json);
+            _unitOfWork.Complete();
 
             return result;
         }

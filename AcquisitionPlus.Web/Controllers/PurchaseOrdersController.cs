@@ -30,7 +30,7 @@ namespace AcquisitionPlus.Web.Controllers
         {
             try
             {
-                return StatusCode(200, _unitOfWork.PurchaseOrder.GetAll());
+                return StatusCode(200, _unitOfWork.PurchaseOrder.GetAll(p => p.Status == Status.Active));
             }
             catch (Exception e)
             {
@@ -67,6 +67,10 @@ namespace AcquisitionPlus.Web.Controllers
             catch (Exception e)
             {
                 return StatusCode(500, e.Message);
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
             }
         }
 

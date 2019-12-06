@@ -4,6 +4,7 @@ using AcquisitionPlus.Entities.Entities;
 using AcquisitionPlus.Persistence.Generics;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AcquisitionPlus.Persistence.Repositories
 {
@@ -22,8 +23,9 @@ namespace AcquisitionPlus.Persistence.Repositories
         {
             foreach (var purchaseOrder in purchaseOrders)
             {
-                purchaseOrder.Status = 0;
-                purchaseOrder.UpdateDate = DateTime.Now;
+                var purchaseToUpdate = AcquisitionPlusContext.PurchaseOrders.FirstOrDefault(p => p.Id == purchaseOrder.Id);
+                purchaseToUpdate.Status = Status.Inactive;
+                purchaseToUpdate.UpdateDate = DateTime.Now;
             }
         }
     }
