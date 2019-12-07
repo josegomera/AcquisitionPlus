@@ -75,6 +75,10 @@ namespace AcquisitionPlus.Web.Controllers
             {
                 if (supplier == null) return StatusCode(400, new { ErroMessage = "Object is Null" });
 
+                supplier.CreationDate = DateTime.UtcNow.AddMinutes(-240);
+                supplier.Id = Guid.NewGuid();
+                supplier.Status = Status.Active;
+
                 _unitOfWork.Supplier.Add(supplier);
 
                 return StatusCode(201, _unitOfWork.Complete());
