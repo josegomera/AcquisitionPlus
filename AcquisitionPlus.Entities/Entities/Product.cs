@@ -10,6 +10,7 @@ namespace AcquisitionPlus.Entities.Entities
         public string Description { get; set; }
         public string Brand { get; set; }
         public int Stock { get; set; }
+        public decimal UnitCost { get; set; }
         public DateTime CreationDate { get; set; }
         public DateTime? UpdateDate { get; set; }
         public Status Status { get; set; }

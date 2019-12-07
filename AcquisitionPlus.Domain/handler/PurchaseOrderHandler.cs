@@ -31,6 +31,7 @@ namespace AcquisitionPlus.Domain.handler
                 currencyTypeId = 1
             };
 
+
             var accountingEntryCredit = new
             {
                 data.description,
@@ -42,6 +43,7 @@ namespace AcquisitionPlus.Domain.handler
                 currencyTypeId = 1
             };
 
+
             var Json = new
             {
                 accountingEntryDebit,
@@ -49,6 +51,10 @@ namespace AcquisitionPlus.Domain.handler
             };
 
             var result = postEntriesService.PostEntries(Json);
+
+            _unitOfWork.PurchaseOrder.desactivatePurchases(data.purchaseOrders);
+
+            _unitOfWork.Complete();
 
             return result;
         }

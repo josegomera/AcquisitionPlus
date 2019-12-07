@@ -30,7 +30,7 @@ namespace AcquisitionPlus.Web.Controllers
         {
             try
             {
-                return StatusCode(200, _unitOfWork.PurchaseOrder.GetAll());
+                return StatusCode(200, _unitOfWork.PurchaseOrder.GetAll(p => p.Status == Status.Active));
             }
             catch (Exception e)
             {
@@ -61,12 +61,16 @@ namespace AcquisitionPlus.Web.Controllers
             try
             {
                 if (asientos == null) return StatusCode(400, new { ErrorMessage = "Object is Null" });
-
+                    
                 return StatusCode(200, _handler.Contabilize(asientos, _postEntriesService));
             }
             catch (Exception e)
             {
                 return StatusCode(500, e.Message);
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
             }
         }
 
