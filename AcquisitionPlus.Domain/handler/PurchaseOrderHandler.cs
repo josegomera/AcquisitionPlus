@@ -1,6 +1,8 @@
 ﻿using AcquisitionPlus.Business.Interfaces;
+using AcquisitionPlus.Business.Interfaces.Services;
 using AcquisitionPlus.Entities.DTO;
 using AcquisitionPlus.Entities.Entities;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -15,6 +17,68 @@ namespace AcquisitionPlus.Domain.handler
         {
             _unitOfWork = unitOfWork;
         }
+
+        public dynamic Contabilize(AsientosDTO data, IPostEntriesService postEntriesService)
+        {
+            var accountingEntryDebit = new
+            {
+                data.description,
+                auxiliaryAccountId = 8,
+                account = "80",
+                movementType = 1,
+                period = DateTime.UtcNow.AddMinutes(-240),
+                data.amount,
+                currencyTypeId = 1
+            };
+
+
+            var accountingEntryCredit = new
+            {
+                data.description,
+                auxiliaryAccountId = 8,
+                account = "4",
+                movementType = 1,
+                period = DateTime.UtcNow.AddMinutes(-240),
+                data.amount,
+                currencyTypeId = 1
+            };
+
+
+            var Json = new
+            {
+                accountingEntryDebit,
+                accountingEntryCredit
+            };
+
+            var result = postEntriesService.PostEntries(Json);
+
+            _unitOfWork.PurchaseOrder.desactivatePurchases(data.purchaseOrders);
+
+            _unitOfWork.Complete();
+
+            return result;
+        }
+
+        /*{
+			"accountingEntryDebit": {
+				"description": "Pago de Nomina abri; 2019",
+				"auxiliaryAccountId": 7,
+				"account": "80",
+				"movementType": 1,
+				"period": "2019-12-01T04:22:45.253Z",
+				"amount": 80000,
+				"currencyTypeId": 1
+		  },
+		 "accountingEntryCredit": {
+				"description": "Pago de Nomina abri 2019",
+				"auxiliaryAccountId": 7,
+				"account": "4",
+				"movementType": 1,
+				"period": "2019-12-01T04:22:45.253Z",
+				"amount": 80000,
+				"currencyTypeId": 1
+			}	
+		}*/
 
         public void Execute(PurchaseOrder purchase)
         {

@@ -69,13 +69,17 @@ namespace AcquisitionPlus.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(AddSupplier_ProductsDTO addSupplierProductsDTO)
+        public IActionResult Add(Supplier supplier)
         {
             try
             {
-                if (addSupplierProductsDTO == null) return StatusCode(400, new { ErroMessage = "Object is Null" });
+                if (supplier == null) return StatusCode(400, new { ErroMessage = "Object is Null" });
 
-                _supplierRepositoryHandler.Execute(addSupplierProductsDTO);
+                supplier.CreationDate = DateTime.UtcNow.AddMinutes(-240);
+                supplier.Id = Guid.NewGuid();
+                supplier.Status = Status.Active;
+
+                _unitOfWork.Supplier.Add(supplier);
 
                 return StatusCode(201, _unitOfWork.Complete());
             }
