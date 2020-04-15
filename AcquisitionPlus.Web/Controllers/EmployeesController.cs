@@ -20,10 +20,6 @@ namespace AcquisitionPlus.Web.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        /// <summary>
-        /// Get all the Employees
-        /// </summary>
-        /// <returns></returns>
         [HttpGet]
         public IActionResult Get()
         {
@@ -37,11 +33,6 @@ namespace AcquisitionPlus.Web.Controllers
             }
         }
 
-        /// <summary>
-        /// Get Employee by Id(GUID)
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
         [HttpGet]
         [Route("{id:Guid}")]
         public IActionResult Get(Guid id)
@@ -58,11 +49,22 @@ namespace AcquisitionPlus.Web.Controllers
             }
         }
 
-        /// <summary>
-        /// Add a Employee
-        /// </summary>
-        /// <param name="employee"></param>
-        /// <returns></returns>
+        [HttpGet]
+        [Route("GetEmployees")]
+        public IActionResult GetProducts()
+        {
+            try
+            {
+                var Employees = _unitOfWork.Employee.GetAll().Select(x => new { x.Id, FullName = $"{x.Name} { x.LastName}" }).ToList();
+
+                return StatusCode(200, Employees);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+
         [HttpPost]
         public IActionResult Add(Employee employee)
         {
@@ -84,11 +86,6 @@ namespace AcquisitionPlus.Web.Controllers
             }
         }
 
-        /// <summary>
-        /// Update a Employee
-        /// </summary>
-        /// <param name="employee"></param>
-        /// <returns></returns>
         [HttpPut]
         public IActionResult Update(Employee employee)
         {

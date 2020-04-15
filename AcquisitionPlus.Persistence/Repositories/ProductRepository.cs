@@ -19,8 +19,11 @@ namespace AcquisitionPlus.Persistence.Repositories
         public void Update(Product product)
         {
             var Actproduct = Get(product.Id);
+            Actproduct.Description = product.Description;
+            Actproduct.Brand = product.Brand;
             Actproduct.Status = product.Status;
             Actproduct.Stock = product.Stock;
+            Actproduct.UnitCost = product.UnitCost;
             Actproduct.IdSupplier = product.IdSupplier;
             Actproduct.IdUnitOfMeasurement = product.IdUnitOfMeasurement;
             Actproduct.UpdateDate = product.UpdateDate;

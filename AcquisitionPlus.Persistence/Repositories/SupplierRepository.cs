@@ -22,6 +22,7 @@ namespace AcquisitionPlus.Persistence.Repositories
             ActSupplier.Identification_Rnc = supplier.Identification_Rnc;
             ActSupplier.UpdateDate = supplier.UpdateDate;
             ActSupplier.Status = supplier.Status;
+            ActSupplier.Name = supplier.Name;
         }
     }
 }

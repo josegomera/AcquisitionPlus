@@ -4,14 +4,16 @@ using AcquisitionPlus.DAL.SQL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AcquisitionPlus.DAL.Migrations
 {
     [DbContext(typeof(AcquisitionPlusDbContext))]
-    partial class AcquisitionPlusDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191104215420_UpdateRelationshipPO-PR")]
+    partial class UpdateRelationshipPOPR
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,7 +53,7 @@ namespace AcquisitionPlus.DAL.Migrations
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("IdDepartment")
+                    b.Property<Guid?>("IdDepartment")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("IdentificationNumber")
@@ -97,10 +99,10 @@ namespace AcquisitionPlus.DAL.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("IdSupplier")
+                    b.Property<Guid?>("IdSupplier")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("IdUnitOfMeasurement")
+                    b.Property<Guid?>("IdUnitOfMeasurement")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Status")
@@ -108,9 +110,6 @@ namespace AcquisitionPlus.DAL.Migrations
 
                     b.Property<int>("Stock")
                         .HasColumnType("int");
-
-                    b.Property<decimal>("UnitCost")
-                        .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime?>("UpdateDate")
                         .HasColumnType("datetime2");
@@ -136,10 +135,10 @@ namespace AcquisitionPlus.DAL.Migrations
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("IdEmployee")
+                    b.Property<Guid?>("IdEmployee")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("IdProduct")
+                    b.Property<Guid?>("IdProduct")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("NoOrder")
@@ -181,9 +180,6 @@ namespace AcquisitionPlus.DAL.Migrations
                     b.Property<string>("Identification_Rnc")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
@@ -222,39 +218,29 @@ namespace AcquisitionPlus.DAL.Migrations
                 {
                     b.HasOne("AcquisitionPlus.Entities.Entities.Department", "Department")
                         .WithMany("Employees")
-                        .HasForeignKey("IdDepartment")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("IdDepartment");
                 });
 
             modelBuilder.Entity("AcquisitionPlus.Entities.Entities.Product", b =>
                 {
                     b.HasOne("AcquisitionPlus.Entities.Entities.Supplier", "Supplier")
                         .WithMany("Products")
-                        .HasForeignKey("IdSupplier")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("IdSupplier");
 
                     b.HasOne("AcquisitionPlus.Entities.Entities.UnitOfMeasurement", "UnitOfMeasurement")
                         .WithMany("Products")
-                        .HasForeignKey("IdUnitOfMeasurement")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("IdUnitOfMeasurement");
                 });
 
             modelBuilder.Entity("AcquisitionPlus.Entities.Entities.PurchaseOrder", b =>
                 {
                     b.HasOne("AcquisitionPlus.Entities.Entities.Employee", "Employee")
                         .WithMany("PurchaseOrders")
-                        .HasForeignKey("IdEmployee")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("IdEmployee");
 
                     b.HasOne("AcquisitionPlus.Entities.Entities.Product", "Product")
                         .WithMany("PurchaseOrders")
-                        .HasForeignKey("IdProduct")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("IdProduct");
                 });
 #pragma warning restore 612, 618
         }

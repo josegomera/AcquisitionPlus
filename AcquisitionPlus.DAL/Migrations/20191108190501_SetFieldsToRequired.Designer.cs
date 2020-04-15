@@ -4,14 +4,16 @@ using AcquisitionPlus.DAL.SQL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AcquisitionPlus.DAL.Migrations
 {
     [DbContext(typeof(AcquisitionPlusDbContext))]
-    partial class AcquisitionPlusDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191108190501_SetFieldsToRequired")]
+    partial class SetFieldsToRequired
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -109,9 +111,6 @@ namespace AcquisitionPlus.DAL.Migrations
                     b.Property<int>("Stock")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("UnitCost")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<DateTime?>("UpdateDate")
                         .HasColumnType("datetime2");
 
@@ -179,9 +178,6 @@ namespace AcquisitionPlus.DAL.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Identification_Rnc")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Status")

@@ -5,8 +5,8 @@ using System.Text;
 
 namespace AcquisitionPlus.Business.Interfaces
 {
-    public interface IPurchaseHandler
+    public interface ISupplierRepositoryHandler
     {
-        void AddPurchaseOrder(AddPurchaseOrderDTO addPurchaseOrder);
+        void Execute(AddSupplier_ProductsDTO addSupplier_ProductsDTO);
     }
 }

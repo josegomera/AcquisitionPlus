@@ -5,11 +5,9 @@ using System.Text;
 
 namespace AcquisitionPlus.Entities.DTO
 {
-    public class AddPurchaseOrderDTO
+    public class AddSupplier_ProductsDTO
     {
-        public PurchaseOrder PurchaseOrder { get; set; }
-
-        
-        public Employee Employee { get; set; }
+        public Supplier Supplier { get; set; }
+        public Product Product { get; set; }
     }
 }

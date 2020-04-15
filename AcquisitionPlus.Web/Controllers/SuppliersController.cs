@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AcquisitionPlus.Business.Interfaces;
+using AcquisitionPlus.Entities.DTO;
 using AcquisitionPlus.Entities.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,16 +15,14 @@ namespace AcquisitionPlus.Web.Controllers
     public class SuppliersController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly ISupplierRepositoryHandler _supplierRepositoryHandler;
 
-        public SuppliersController(IUnitOfWork unitOfWork)
+        public SuppliersController(IUnitOfWork unitOfWork, ISupplierRepositoryHandler supplierRepositoryHandler)
         {
             _unitOfWork = unitOfWork;
+            _supplierRepositoryHandler = supplierRepositoryHandler;
         }
 
-        /// <summary>
-        /// Get all the Suppliers
-        /// </summary>
-        /// <returns></returns>
         [HttpGet]
         public IActionResult Get()
         {
@@ -37,11 +36,6 @@ namespace AcquisitionPlus.Web.Controllers
             }
         }
 
-        /// <summary>
-        /// Get Suppliers by Id(GUID)
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
         [HttpGet]
         [Route("{id:Guid}")]
         public IActionResult Get(Guid id)
@@ -58,11 +52,22 @@ namespace AcquisitionPlus.Web.Controllers
             }
         }
 
-        /// <summary>
-        /// Add a Supplier
-        /// </summary>
-        /// <param name="supplier"></param>
-        /// <returns></returns>
+        [HttpGet]
+        [Route("GetSuppliers")]
+        public IActionResult GetSuppliers()
+        {
+            try
+            {
+                var supplier = _unitOfWork.Supplier.GetAll().Select(x => new { x.Id, Supplier = x.Name }).ToList();
+
+                return StatusCode(200, supplier);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+
         [HttpPost]
         public IActionResult Add(Supplier supplier)
         {
@@ -84,11 +89,6 @@ namespace AcquisitionPlus.Web.Controllers
             }
         }
 
-        /// <summary>
-        /// Update a Supplier
-        /// </summary>
-        /// <param name="supplier"></param>
-        /// <returns></returns>
         [HttpPut]
         public IActionResult Update(Supplier supplier)
         {

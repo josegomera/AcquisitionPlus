@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AcquisitionPlus.Business.Interfaces;
+using AcquisitionPlus.Business.Interfaces.Services;
+using AcquisitionPlus.Domain.handler;
 using AcquisitionPlus.Entities.DTO;
 using AcquisitionPlus.Entities.Entities;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AcquisitionPlus.Web.Controllers
@@ -15,24 +13,24 @@ namespace AcquisitionPlus.Web.Controllers
     public class PurchaseOrdersController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IPurchaseHandler _purchaseHadler;
+        private readonly IPurchaseOrderHandler _handler;
+        private readonly IPostEntriesService _postEntriesService;
 
-        public PurchaseOrdersController(IUnitOfWork unitOfWork, IPurchaseHandler purchaseHadler)
+        public PurchaseOrdersController(IUnitOfWork unitOfWork, 
+                                        IPurchaseOrderHandler handler,
+                                        IPostEntriesService postEntriesService)
         {
             _unitOfWork = unitOfWork;
-            _purchaseHadler = purchaseHadler;
+            _handler = handler;
+            _postEntriesService = postEntriesService;
         }
 
-        /// <summary>
-        /// Get all the Departments
-        /// </summary>
-        /// <returns></returns>
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult Get() 
         {
             try
             {
-                return StatusCode(200, _unitOfWork.PurchaseOrder.GetAll());
+                return StatusCode(200, _unitOfWork.PurchaseOrder.GetAll(p => p.Status == Status.Active));
             }
             catch (Exception e)
             {
@@ -40,11 +38,6 @@ namespace AcquisitionPlus.Web.Controllers
             }
         }
 
-        /// <summary>
-        /// Get Department by Id(GUID)
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
         [HttpGet]
         [Route("{id:Guid}")]
         public IActionResult Get(Guid id)
@@ -61,18 +54,35 @@ namespace AcquisitionPlus.Web.Controllers
             }
         }
 
-        /// <summary>
-        /// Add a Department
-        /// </summary>
-        /// <param name="purchaseOrder"></param>
-        /// <returns></returns>
         [HttpPost]
-        public IActionResult Add(AddPurchaseOrderDTO purchaseOrder)
+        [Route("Contabilize")]
+        public IActionResult GetContabilize(AsientosDTO asientos)
         {
             try
             {
-                _purchaseHadler.AddPurchaseOrder(purchaseOrder);
+                if (asientos == null) return StatusCode(400, new { ErrorMessage = "Object is Null" });
+                    
+                return StatusCode(200, _handler.Contabilize(asientos, _postEntriesService));
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
+        }
 
+        [HttpPost]
+        public IActionResult Add(PurchaseOrder purchase)
+        {
+            try
+            {
+                if (purchase == null) return StatusCode(400, new { ErroMessage = "Object is Null" });
+
+                _handler.Execute(purchase);
+                
                 return StatusCode(201, _unitOfWork.Complete());
             }
             catch (Exception e)
@@ -81,25 +91,21 @@ namespace AcquisitionPlus.Web.Controllers
             }
         }
 
-        //[HttpPut]
-        //public IActionResult Update(PurchaseOrder purchaseOrder)
-        //{
-        //    try
-        //    {
-        //        if (department == null) return StatusCode(400, new { ErroMessage = "Object is Null" });
+        [HttpPut]
+        public IActionResult Update(PurchaseOrder purchase)
+        {
+            try
+            {
+                if (purchase == null) return StatusCode(400, new { ErroMessage = "Object is Null" });
 
-        //        department.UpdateDate = DateTime.UtcNow.AddMinutes(-240);
+                _handler.Update(purchase);
 
-        //        department.Status = Status.Active;
-
-        //        _unitOfWork.Department.Update(department);
-
-        //        return StatusCode(204, _unitOfWork.Complete());
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        return StatusCode(500, e.Message);
-        //    }
-        //}
+                return StatusCode(201, _unitOfWork.Complete());
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
     }
 }

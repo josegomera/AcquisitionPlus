@@ -14,8 +14,6 @@ namespace AcquisitionPlus.Business.Interfaces
         IPurchaseOrderRepository PurchaseOrder { get; }
         ISupplierRepository Supplier { get; }
         IUnitOfMeasurementRepository UnitOfMeasurement { get; }
-        IItemRepository Item { get; }
-
         void Dispose();
     }
 }
